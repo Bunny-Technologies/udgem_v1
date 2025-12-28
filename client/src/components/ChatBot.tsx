@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MessageCircle, X, Send, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -100,6 +100,57 @@ export default function ChatBot() {
     "I don't have that exact information right now. I have forwarded your question to our support team at info@udgem.in. They will reach out to you shortly at the phone number you provided.",
     "నాకు ఆ సమాచారం ఇప్పుడు లేదు. మీ ప్రశ్నను మా సపోర్ట్ టీమ్‌కు info@udgem.in వద్ద ఫార్వార్డ్ చేసాను. మీరు అందించిన ఫోన్ నంబర్‌కు వారు త్వరలో మిమ్మల్ని సంప్రదిస్తారు."
   );
+
+  // Listen for product inquiry events from AdBanner
+  useEffect(() => {
+    const handleProductInquiry = (event: CustomEvent<{ company: string; costInfo: string }>) => {
+      const { company, costInfo } = event.detail;
+      
+      // Open chat
+      setIsOpen(true);
+      
+      // If phone not collected, we need to wait for that first
+      if (!isPhoneCollected) {
+        // Store the pending message to show after phone collection
+        const pendingMessage = t(
+          `Tell me about ${company} solar prices`,
+          `${company} సోలార్ ధరల గురించి చెప్పండి`
+        );
+        
+        // Add a listener for when phone is collected
+        const checkPhoneInterval = setInterval(() => {
+          if (isPhoneCollected) {
+            clearInterval(checkPhoneInterval);
+            setMessages(prev => [
+              ...prev,
+              { id: Date.now(), text: pendingMessage, isBot: false },
+              { id: Date.now() + 1, text: costInfo, isBot: true }
+            ]);
+          }
+        }, 500);
+        
+        // Clear after 30 seconds if phone not collected
+        setTimeout(() => clearInterval(checkPhoneInterval), 30000);
+      } else {
+        // Phone already collected, add message immediately
+        const userQuestion = t(
+          `Tell me about ${company} solar prices`,
+          `${company} సోలార్ ధరల గురించి చెప్పండి`
+        );
+        
+        setMessages(prev => [
+          ...prev,
+          { id: Date.now(), text: userQuestion, isBot: false },
+          { id: Date.now() + 1, text: costInfo, isBot: true }
+        ]);
+      }
+    };
+
+    window.addEventListener('openChatWithProduct', handleProductInquiry as EventListener);
+    return () => {
+      window.removeEventListener('openChatWithProduct', handleProductInquiry as EventListener);
+    };
+  }, [isPhoneCollected, t]);
 
   const isValidPhone = (phone: string) => {
     const cleaned = phone.replace(/\D/g, '');

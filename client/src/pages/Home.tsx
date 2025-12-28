@@ -67,51 +67,48 @@ function HeroCarousel() {
   };
 
   return (
-    <div className="relative w-full h-full min-h-[300px] rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20" data-testid="carousel-hero">
-      <div className="relative w-full h-full">
-        {carouselImages.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-500 ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            {imageErrors[index] ? (
-              <div className="w-full h-full flex items-center justify-center bg-white/5">
-                <div className="text-center text-white/60 p-4">
-                  <Sun className="h-12 w-12 mx-auto mb-2 text-solar" />
-                  <p className="text-sm">Image: {image.src}</p>
-                  <p className="text-xs mt-1">(Upload flyer images to display)</p>
-                </div>
+    <div className="relative w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20" style={{ height: "400px" }} data-testid="carousel-hero">
+      {carouselImages.map((image, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 transition-opacity duration-500 ${
+            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+          }`}
+        >
+          {imageErrors[index] ? (
+            <div className="w-full h-full flex items-center justify-center bg-white/5">
+              <div className="text-center text-white/60 p-4">
+                <Sun className="h-12 w-12 mx-auto mb-2 text-solar" />
+                <p className="text-sm">Image not found</p>
               </div>
-            ) : (
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-                onError={() => handleImageError(index)}
-              />
-            )}
-          </div>
-        ))}
-      </div>
+            </div>
+          ) : (
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="w-full h-full object-contain bg-white/5"
+              onError={() => handleImageError(index)}
+            />
+          )}
+        </div>
+      ))}
 
       <button
         onClick={prevSlide}
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
         data-testid="button-carousel-prev"
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
         data-testid="button-carousel-next"
       >
         <ChevronRight className="h-5 w-5" />
       </button>
 
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {carouselImages.map((_, index) => (
           <button
             key={index}

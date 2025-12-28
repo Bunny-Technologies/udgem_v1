@@ -86,7 +86,7 @@ function Footer() {
               <span className="text-xl font-semibold">UdGEM</span>
             </div>
             <p className="text-white/80 text-sm leading-relaxed">
-              Udaya Green Economy Mission - Working towards a sustainable future through solar energy adoption and green initiatives.
+              Uday Green Economy Mission - Working towards a sustainable future through solar energy adoption and green initiatives.
             </p>
           </div>
 
@@ -127,7 +127,7 @@ function Footer() {
         </div>
 
         <div className="border-t border-white/20 mt-8 pt-8 text-center text-sm text-white/60">
-          <p>© {new Date().getFullYear()} UdGEM – Udaya Green Economy Mission. All rights reserved.</p>
+          <p>© UdGEM – Uday Green Economy Mission | info@udgem.in | +91 93999 99047 | +91 73372 63156</p>
         </div>
       </div>
     </footer>

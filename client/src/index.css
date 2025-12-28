@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+
+.section {
+  padding: 60px 0;
+}
+
+.section-title {
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
 /* LIGHT MODE - UdGEM Branding: Deep Blue (#003b73), Solar Yellow (#ffc400), Green (#008c4a) */
 :root {
   --button-outline: rgba(0,0,0, .10);

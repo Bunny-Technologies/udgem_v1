@@ -1,8 +1,9 @@
 import { Link } from "wouter";
-import { Sun, Zap, Building, Leaf, ArrowRight, CheckCircle } from "lucide-react";
+import { Sun, Zap, Building, Leaf, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Layout from "@/components/Layout";
+import { useState, useEffect } from "react";
 
 const features = [
   {
@@ -30,10 +31,97 @@ const steps = [
   { step: 5, title: "Install & Enjoy Free Power", description: "Get solar panels installed" },
 ];
 
+const carouselImages = [
+  { src: "/images/flyer1.jpeg", alt: "UdGEM Solar Flyer 1" },
+  { src: "/images/flyer2.jpeg", alt: "UdGEM Solar Flyer 2" },
+  { src: "/images/flyer3.jpeg", alt: "UdGEM Solar Flyer 3" },
+  { src: "/images/flyer4.jpeg", alt: "UdGEM Solar Flyer 4" },
+];
+
+function HeroCarousel() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const goToSlide = (index: number) => setCurrentSlide(index);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+
+  const handleImageError = (index: number) => {
+    setImageErrors((prev) => ({ ...prev, [index]: true }));
+  };
+
+  return (
+    <div className="relative w-full h-full min-h-[300px] rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20" data-testid="carousel-hero">
+      <div className="relative w-full h-full">
+        {carouselImages.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-500 ${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {imageErrors[index] ? (
+              <div className="w-full h-full flex items-center justify-center bg-white/5">
+                <div className="text-center text-white/60 p-4">
+                  <Sun className="h-12 w-12 mx-auto mb-2 text-solar" />
+                  <p className="text-sm">Image: {image.src}</p>
+                  <p className="text-xs mt-1">(Upload flyer images to display)</p>
+                </div>
+              </div>
+            ) : (
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="w-full h-full object-cover"
+                onError={() => handleImageError(index)}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={prevSlide}
+        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
+        data-testid="button-carousel-prev"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
+        data-testid="button-carousel-next"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+        {carouselImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-2.5 h-2.5 rounded-full transition-colors ${
+              index === currentSlide ? "bg-solar" : "bg-white/50 hover:bg-white/70"
+            }`}
+            data-testid={`button-carousel-dot-${index}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <Layout>
-      <section className="relative bg-gradient-to-br from-primary via-primary to-primary/90 text-white py-16 md:py-24 overflow-hidden">
+      <section className="hero relative bg-gradient-to-br from-primary via-primary to-primary/90 text-white py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -45,7 +133,7 @@ export default function Home() {
               </div>
               
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6" data-testid="text-hero-title">
-                Udaya Green Economy Mission
+                Uday Green Economy Mission
                 <span className="text-solar"> (UdGEM)</span>
               </h1>
               
@@ -78,41 +166,16 @@ export default function Home() {
             </div>
 
             <div className="hidden lg:block">
-              <div className="relative">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-white/10 rounded-xl p-6 text-center">
-                      <Sun className="h-12 w-12 text-solar mx-auto mb-3" />
-                      <p className="text-2xl font-bold">1 Lakh+</p>
-                      <p className="text-sm text-white/70">Target Homes</p>
-                    </div>
-                    <div className="bg-white/10 rounded-xl p-6 text-center">
-                      <Zap className="h-12 w-12 text-solar mx-auto mb-3" />
-                      <p className="text-2xl font-bold">3 Lakh kW</p>
-                      <p className="text-sm text-white/70">Target Capacity</p>
-                    </div>
-                    <div className="bg-white/10 rounded-xl p-6 text-center">
-                      <Building className="h-12 w-12 text-green-400 mx-auto mb-3" />
-                      <p className="text-2xl font-bold">30+ Years</p>
-                      <p className="text-sm text-white/70">Clean Energy</p>
-                    </div>
-                    <div className="bg-white/10 rounded-xl p-6 text-center">
-                      <Leaf className="h-12 w-12 text-green-400 mx-auto mb-3" />
-                      <p className="text-2xl font-bold">Zero</p>
-                      <p className="text-sm text-white/70">Power Bills</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <HeroCarousel />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-muted/30">
+      <section className="section bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
               Mission One Lakh Houses
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -141,10 +204,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-background">
+      <section className="section bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
               How It Works
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -170,9 +233,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-primary text-white">
+      <section className="section bg-primary text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+          <h2 className="section-title text-2xl md:text-3xl font-bold text-white">
             Ready to Go Solar?
           </h2>
           <p className="text-white/80 mb-8 max-w-2xl mx-auto">

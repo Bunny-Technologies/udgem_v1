@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { Sun } from "lucide-react";
+import { Zap } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 /**
  * SolarImpactSlider Component
  * 
- * Displays verified solar energy statistics for India in a scrolling banner.
+ * Displays verified solar energy statistics for India in a scrolling news bulletin.
+ * Uses current language setting (English or Telugu).
  * 
  * To update statistics:
  * - Edit the 'slides' array below
@@ -20,7 +22,7 @@ interface Slide {
 // Solar impact statistics - Update these as needed
 const slides: Slide[] = [
   {
-    en: "India now has over 130 GW of installed solar capacity – a 40× increase since 2014.",
+    en: "India now has over 130 GW of installed solar capacity – a 40x increase since 2014.",
     te: "భారతదేశం ఇప్పుడు 130 GWకు పైగా సోలార్ సామర్థ్యం కలిగి ఉంది – 2014తో పోలిస్తే 40 రెట్లు పెరిగింది."
   },
   {
@@ -44,8 +46,8 @@ const slides: Slide[] = [
     te: "2027 నాటికి 1 కోటి ఇళ్లకు నెలకు 300 యూనిట్ల వరకు సోలార్ విద్యుత్ అందించడం లక్ష్యం."
   },
   {
-    en: "Rooftop solar can reduce over 720 million tonnes of CO₂ emissions in 25 years.",
-    te: "రూఫ్‌టాప్ సోలార్ వల్ల 25 సంవత్సరాల్లో 720 మిలియన్ టన్నుల CO₂ ఉద్గారాలు తగ్గుతాయి."
+    en: "Rooftop solar can reduce over 720 million tonnes of CO2 emissions in 25 years.",
+    te: "రూఫ్‌టాప్ సోలార్ వల్ల 25 సంవత్సరాల్లో 720 మిలియన్ టన్నుల CO2 ఉద్గారాలు తగ్గుతాయి."
   },
   {
     en: "India's solar sector provides jobs to over 3 lakh people nationwide.",
@@ -54,6 +56,7 @@ const slides: Slide[] = [
 ];
 
 export default function SolarImpactSlider() {
+  const { language, t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -68,46 +71,47 @@ export default function SolarImpactSlider() {
     return () => clearInterval(interval);
   }, [isPaused]);
 
+  // Get text based on current language
+  const currentText = language === "en" ? slides[currentSlide].en : slides[currentSlide].te;
+
   return (
     <div
-      className="bg-primary text-white py-3 overflow-hidden"
+      className="bg-gradient-to-r from-solar via-yellow-500 to-solar text-primary py-2 overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       data-testid="solar-impact-slider"
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center gap-3">
-          {/* Sun icon indicator */}
-          <div className="flex-shrink-0">
-            <Sun className="h-6 w-6 text-solar animate-pulse" />
+          {/* Bulletin label */}
+          <div className="flex-shrink-0 flex items-center gap-2">
+            <div className="bg-primary text-solar px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wide flex items-center gap-1">
+              <Zap className="h-3 w-3" />
+              <span>{t("Latest", "తాజా")}</span>
+            </div>
           </div>
 
-          {/* Slide content */}
+          {/* Slide content - single language */}
           <div className="flex-1 min-w-0">
             <div
               key={currentSlide}
               className="animate-fade-in"
               data-testid={`slide-${currentSlide}`}
             >
-              {/* English text - bold */}
-              <p className="font-semibold text-sm md:text-base text-white truncate md:whitespace-normal">
-                {slides[currentSlide].en}
-              </p>
-              {/* Telugu text - slightly smaller */}
-              <p className="text-xs md:text-sm text-white/80 truncate md:whitespace-normal">
-                {slides[currentSlide].te}
+              <p className="font-semibold text-sm md:text-base text-primary truncate md:whitespace-normal">
+                {currentText}
               </p>
             </div>
           </div>
 
-          {/* Slide indicators - visible on all screen sizes */}
+          {/* Slide indicators */}
           <div className="flex-shrink-0 flex gap-1">
             {slides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentSlide ? "bg-solar" : "bg-white/40"
+                  index === currentSlide ? "bg-primary" : "bg-primary/30"
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
                 data-testid={`indicator-${index}`}

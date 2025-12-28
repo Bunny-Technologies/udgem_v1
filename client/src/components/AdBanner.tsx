@@ -117,8 +117,8 @@ export default function AdBanner() {
   const currentAd = ads[currentSlide];
 
   return (
-    <div className="hidden lg:block w-56 flex-shrink-0" data-testid="ad-banner-container">
-      <p className="text-xs text-white/70 text-center uppercase tracking-wide mb-2">
+    <div className="w-full" data-testid="ad-banner-container">
+      <p className="text-xs text-white/60 text-center uppercase tracking-wide mb-1">
         {t("Sponsored", "ప్రకటనలు")}
       </p>
       
@@ -131,28 +131,28 @@ export default function AdBanner() {
           <ChevronUp className="h-4 w-4" />
         </button>
 
-        <div className="pt-6 pb-6">
+        <div className="pt-4 pb-4">
           <div
-            className={`bg-gradient-to-br ${currentAd.bgColor} rounded-lg p-4 text-white shadow-lg transition-all duration-300`}
+            className={`bg-gradient-to-br ${currentAd.bgColor} rounded-lg p-3 text-white shadow-lg transition-all duration-300`}
             data-testid={`ad-card-${currentSlide}`}
           >
-            <div className="flex items-center gap-2 mb-2">
-              <Sun className="h-5 w-5" />
-              <span className="font-bold text-sm">{currentAd.company}</span>
+            <div className="flex items-center gap-2 mb-1">
+              <Sun className="h-4 w-4" />
+              <span className="font-bold text-xs">{currentAd.company}</span>
             </div>
             
-            <p className="text-xs text-white/90 mb-3">
+            <p className="text-xs text-white/90 mb-2">
               {language === "en" ? currentAd.tagline.en : currentAd.tagline.te}
             </p>
             
-            <div className={`${currentAd.accentColor} rounded px-2 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1`}>
+            <div className={`${currentAd.accentColor} rounded px-2 py-0.5 text-xs font-semibold mb-2 inline-flex items-center gap-1`}>
               <Zap className="h-3 w-3" />
               {language === "en" ? currentAd.offer.en : currentAd.offer.te}
             </div>
             
             <button 
               onClick={() => handleLearnMore(currentAd)}
-              className="mt-2 w-full bg-white/20 hover:bg-white/30 transition-colors text-white text-xs font-medium py-2 px-3 rounded flex items-center justify-center gap-1"
+              className="w-full bg-white/20 hover:bg-white/30 transition-colors text-white text-xs font-medium py-1.5 px-2 rounded flex items-center justify-center gap-1"
               data-testid={`button-learn-more-${currentAd.id}`}
             >
               {t("Learn More", "మరింత తెలుసుకోండి")}

@@ -1,11 +1,12 @@
 import { Link } from "wouter";
-import { Sun, Zap, Building, Leaf, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Sun, Zap, Building, Leaf, ArrowRight, ChevronLeft, ChevronRight, FileText, Calculator, Users, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Layout from "@/components/Layout";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
 import SolarImpactSlider from "@/components/SolarImpactSlider";
+import InfoSlider from "@/components/InfoSlider";
 import AdBanner from "@/components/AdBanner";
 
 import teluguVillageHome from "@assets/generated_images/telugu_village_home_with_solar.png";
@@ -44,7 +45,7 @@ function HeroCarousel() {
   };
 
   return (
-    <div className="relative w-full rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20" style={{ height: "400px" }} data-testid="carousel-hero">
+    <div className="relative w-full h-full rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20" data-testid="carousel-hero">
       {carouselImages.map((image, index) => (
         <div
           key={index}
@@ -101,6 +102,41 @@ function HeroCarousel() {
   );
 }
 
+function QuickActions() {
+  const { t } = useLanguage();
+
+  const actions = [
+    { icon: FileText, label: t("Apply Now", "ఇప్పుడే దరఖాస్తు"), href: "/apply", color: "bg-solar text-primary" },
+    { icon: Calculator, label: t("Check Subsidy", "సబ్సిడీ తనిఖీ"), href: "/pm-surya-ghar", color: "bg-green-500 text-white" },
+    { icon: Users, label: t("Find Vendor", "వెండర్ వెతకండి"), href: "/contact", color: "bg-blue-500 text-white" },
+    { icon: Phone, label: t("Contact Us", "సంప్రదించండి"), href: "/contact", color: "bg-purple-500 text-white" },
+  ];
+
+  return (
+    <div className="w-full bg-primary/95 border-t border-white/10" data-testid="quick-actions">
+      <div className="w-full px-4 py-3">
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <span className="text-white/70 text-sm font-medium mr-2">
+            {t("Quick Actions:", "త్వరిత చర్యలు:")}
+          </span>
+          {actions.map((action, index) => (
+            <Link key={index} href={action.href}>
+              <Button
+                size="sm"
+                className={`${action.color} font-medium gap-2`}
+                data-testid={`button-quick-action-${index}`}
+              >
+                <action.icon className="h-4 w-4" />
+                {action.label}
+              </Button>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const { t } = useLanguage();
 
@@ -141,73 +177,87 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* India Solar Impact Slider - Shows verified solar statistics */}
       <SolarImpactSlider />
 
-      <section className="hero relative bg-gradient-to-br from-primary via-primary to-primary/90 text-white py-16 md:py-24 overflow-hidden">
+      <section className="hero relative bg-gradient-to-br from-primary via-primary to-primary/90 text-white overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30"></div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex gap-6">
-            {/* Main hero content */}
-            <div className="flex-1">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
-                <div className="text-center lg:text-left">
-                  <div className="inline-flex items-center gap-2 bg-solar/20 text-solar px-4 py-2 rounded-full text-sm font-medium mb-6">
-                    <Sun className="h-4 w-4" />
-                    <span>{t("PM Surya Ghar Yojana Partner", "PM సూర్య ఘర్ యోజన భాగస్వామి")}</span>
-                  </div>
-                  
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6" data-testid="text-hero-title">
-                    {t("Uday Green Economy Mission", "ఉదయ గ్రీన్ ఎకానమీ మిషన్")}
-                    <span className="text-solar"> (UdGEM)</span>
-                  </h1>
-                  
-                  <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed" data-testid="text-hero-subtitle">
-                    {t("For the People, For the Nation, For Future Generations", "ప్రజల కోసం, దేశం కోసం, భవిష్యత్ తరాల కోసం")}
-                  </p>
-                  
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <Link href="/pm-surya-ghar">
-                      <Button 
-                        size="lg" 
-                        className="bg-solar text-primary hover:bg-solar/90 font-semibold px-8"
-                        data-testid="button-check-subsidy"
-                      >
-                        {t("Check Your Subsidy", "మీ సబ్సిడీ తనిఖీ చేయండి")}
-                        <ArrowRight className="ml-2 h-5 w-5" />
-                      </Button>
-                    </Link>
-                    <Link href="/apply">
-                      <Button 
-                        size="lg" 
-                        variant="outline" 
-                        className="border-white text-white hover:bg-white/10 font-semibold px-8"
-                        data-testid="button-apply-now"
-                      >
-                        {t("Apply Now", "ఇప్పుడే దరఖాస్తు చేయండి")}
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="mt-8 lg:mt-0">
-                  <HeroCarousel />
-                </div>
+        <div className="w-full px-4 py-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_2fr_1fr] gap-4 lg:gap-6 min-h-[60vh] lg:min-h-[70vh]">
+            <div className="flex flex-col justify-center">
+              <div className="inline-flex items-center gap-2 bg-solar/20 text-solar px-4 py-2 rounded-full text-sm font-medium mb-4 w-fit">
+                <Sun className="h-4 w-4" />
+                <span>{t("PM Surya Ghar Yojana Partner", "PM సూర్య ఘర్ యోజన భాగస్వామి")}</span>
+              </div>
+              
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-4" data-testid="text-hero-title">
+                {t("Uday Green Economy Mission", "ఉదయ గ్రీన్ ఎకానమీ మిషన్")}
+                <span className="text-solar"> (UdGEM)</span>
+              </h1>
+              
+              <p className="text-base md:text-lg text-white/90 mb-6 leading-relaxed" data-testid="text-hero-subtitle">
+                {t("For the People, For the Nation, For Future Generations", "ప్రజల కోసం, దేశం కోసం, భవిష్యత్ తరాల కోసం")}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link href="/pm-surya-ghar">
+                  <Button 
+                    size="lg" 
+                    className="bg-solar text-primary hover:bg-solar/90 font-semibold px-6"
+                    data-testid="button-check-subsidy"
+                  >
+                    {t("Check Your Subsidy", "మీ సబ్సిడీ తనిఖీ చేయండి")}
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link href="/apply">
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-white text-white hover:bg-white/10 font-semibold px-6"
+                    data-testid="button-apply-now"
+                  >
+                    {t("Apply Now", "ఇప్పుడే దరఖాస్తు చేయండి")}
+                  </Button>
+                </Link>
               </div>
             </div>
-            
-            {/* Ad Banner in hero section */}
-            <AdBanner />
+
+            <div className="h-64 lg:h-auto">
+              <HeroCarousel />
+            </div>
+
+            <div className="hidden lg:flex flex-col gap-3 h-full">
+              <div className="flex-1 min-h-0">
+                <InfoSlider />
+              </div>
+              <div className="border-t border-white/20 pt-3">
+                <AdBanner />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Main content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <section className="section">
-          <div className="text-center mb-12">
-            <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
+      <QuickActions />
+
+      <div className="lg:hidden bg-primary/90 py-6 px-4">
+        <div className="overflow-x-auto">
+          <div className="flex gap-4 pb-2">
+            <div className="flex-shrink-0 w-64">
+              <InfoSlider />
+            </div>
+            <div className="flex-shrink-0 w-56">
+              <AdBanner />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full px-4 py-12">
+        <section className="max-w-7xl mx-auto mb-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               {t("Mission One Lakh Houses", "మిషన్ ఒక లక్ష ఇళ్ళు")}
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -237,9 +287,9 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section">
-          <div className="text-center mb-12">
-            <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
+        <section className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               {t("How It Works", "ఇది ఎలా పనిచేస్తుంది")}
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -265,9 +315,9 @@ export default function Home() {
         </section>
       </div>
 
-      <section className="section bg-primary text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="section-title text-2xl md:text-3xl font-bold text-white">
+      <section className="w-full bg-primary text-white py-12">
+        <div className="w-full px-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {t("Ready to Go Solar?", "సోలార్‌కు సిద్ధంగా ఉన్నారా?")}
           </h2>
           <p className="text-white/80 mb-8 max-w-2xl mx-auto">

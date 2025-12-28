@@ -1,0 +1,61 @@
+Fix UdGEM homepage layout + make it more informative.
+
+Current issue:
+There are visible left/right gaps and the header/logo looks centered-left. The right ads banner is not at the extreme right and not full height.
+
+Goal (layout rules):
+1) The entire page must be true full-width (100vw). Remove left/right gaps/margins.
+2) Use a 3-column grid for the hero section:
+   - Left column: main hero text + CTA (40% width)
+   - Middle column: main image slider (40% width)
+   - Right column: “Info/Ads slider” (20% width) pinned to the extreme right.
+3) The right “Info/Ads slider” must stretch full height of the hero section (same height as left+middle content area).
+4) Header:
+   - UdGEM logo/title must be flush-left (start of viewport).
+   - Navigation stays center.
+   - Language switch stays top-right.
+   - No horizontal padding beyond a small consistent padding like 16px.
+5) The right slider should be a vertical carousel with 6–10 info cards and be “stuffy/informative” (like a news/info panel).
+6) The top ticker banner should span full width (no side gaps).
+7) Make it responsive:
+   - Desktop: 3 columns (Left/Middle/Right)
+   - Tablet: right panel moves below slider
+   - Mobile: single column stacking, right panel becomes horizontal swipe cards.
+
+Implementation details:
+- Remove container max-width restrictions. Replace with:
+  body, #root, .page { width:100%; max-width:none; margin:0; }
+  use padding-left/right:16px only.
+- Hero layout: use CSS Grid:
+  grid-template-columns: 2fr 2fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+- Right panel must use height: 100% and overflow:auto; with sticky position if possible.
+- Ensure hero section itself has a fixed minimum height (like min-height: 70vh) so right banner looks full.
+- Keep brand colors: dark blue background, yellow accents.
+
+Content for the right Info/Ads slider cards (English + Telugu):
+Card template: Title, stat line, 1 short description, CTA button.
+
+Include these cards:
+1) India Solar Capacity: 130+ GW (2014→40x growth) / భారతదేశం 130+ GW
+2) PM Surya Ghar Goal: 1 crore homes by 2027 / 2027 నాటికి 1 కోటి ఇళ్లు
+3) Rooftop Subsidy: up to ₹78,000 / గరిష్టంగా ₹78,000 సబ్సిడీ
+4) 300 Units Benefit: up to 300 units/month / నెలకు 300 యూనిట్ల వరకు
+5) AP Update: 31,000+ rooftop units commissioned / ఏపీలో 31,000+ యూనిట్లు
+6) Telangana: scheme active via TSREDCO, adoption slower / తెలంగాణలో అమలు ఉంది, వృద్ధి నెమ్మది
+7) CO2 Reduction potential: major long-term reduction / కార్బన్ ఉద్గారాలు తగ్గింపు
+8) Jobs: solar supports lakhs of jobs / లక్షల ఉద్యోగాలు
+
+Also:
+- Add a “Quick Actions” mini section under hero:
+  Apply Now (portal), Check Subsidy, Find Vendor, Contact Support.
+- Keep spacing tight and information dense (stuffy): smaller cards, more bullets.
+
+Deliverable:
+Update the existing React/Vite/Tailwind project:
+- Fix header alignment (logo flush-left, right utilities flush-right)
+- Fix homepage hero grid full width with no side gaps
+- Implement right-side full-height vertical info slider
+- Ensure responsive behavior matches above rules
+Return the updated component files and CSS/Tailwind changes.

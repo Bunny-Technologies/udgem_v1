@@ -26,7 +26,7 @@ function LanguageBar() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] bg-primary/95 border-b border-white/10" data-testid="language-bar">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4">
         <div className="flex items-center justify-end gap-2 h-8">
           <Globe className="h-4 w-4 text-white/70" />
           <button
@@ -62,14 +62,14 @@ function Navbar() {
 
   return (
     <nav className="fixed top-8 left-0 right-0 z-50 bg-primary shadow-lg" data-testid="navbar">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center gap-2" data-testid="link-logo">
+      <div className="w-full px-4">
+        <div className="flex items-center h-16">
+          <Link href="/" className="flex items-center gap-2 flex-shrink-0" data-testid="link-logo">
             <Sun className="h-8 w-8 text-solar" />
             <span className="text-xl font-bold text-white">UdGEM</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1 flex-1 justify-center">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -87,13 +87,15 @@ function Navbar() {
           </div>
 
           <button
-            className="md:hidden p-2 rounded-md text-white hover:bg-white/10"
+            className="md:hidden ml-auto p-2 rounded-md text-white hover:bg-white/10"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
             data-testid="button-mobile-menu"
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
+          
+          <div className="hidden md:block w-24"></div>
         </div>
       </div>
 
@@ -128,7 +130,7 @@ function Footer() {
 
   return (
     <footer className="bg-primary text-white" data-testid="footer">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="w-full px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">

@@ -6,24 +6,24 @@ import Layout from "@/components/Layout";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
 
-import indianHome1 from "@assets/stock_images/indian_family_house__ee5c6833.jpg";
-import indianHome2 from "@assets/stock_images/indian_family_house__b187bc2e.jpg";
-import indianHome3 from "@assets/stock_images/indian_family_house__a588d8d0.jpg";
-import indianVillage1 from "@assets/stock_images/indian_village_home__49b9020d.jpg";
-import indianVillage2 from "@assets/stock_images/indian_village_home__ded51408.jpg";
-import indianVillage3 from "@assets/stock_images/indian_village_home__7dc39a04.jpg";
-import indianTech1 from "@assets/stock_images/indian_technician_in_49d08f9b.jpg";
-import indianTech2 from "@assets/stock_images/indian_technician_in_8e72c31d.jpg";
+import ruralIndia1 from "@assets/stock_images/rural_india_village__2af0c0b4.jpg";
+import ruralIndia2 from "@assets/stock_images/rural_india_village__7eb6e4ab.jpg";
+import ruralIndia3 from "@assets/stock_images/rural_india_village__e63a85b8.jpg";
+import southIndia1 from "@assets/stock_images/south_india_village__5092e093.jpg";
+import southIndia2 from "@assets/stock_images/south_india_village__7ff696d4.jpg";
+import southIndia3 from "@assets/stock_images/south_india_village__979eb0b5.jpg";
+import villageWomen1 from "@assets/stock_images/indian_rural_village_b90ff5ad.jpg";
+import villageWomen2 from "@assets/stock_images/indian_rural_village_82e53dd6.jpg";
 
 const carouselImages = [
-  { src: indianHome1, alt: "Indian home with rooftop solar panels" },
-  { src: indianVillage1, alt: "Solar power in Indian village" },
-  { src: indianTech1, alt: "Indian technician installing solar panels" },
-  { src: indianHome2, alt: "Solar installation on Indian house" },
-  { src: indianVillage2, alt: "Rural Indian home with solar electricity" },
-  { src: indianTech2, alt: "Solar panel installation worker in India" },
-  { src: indianHome3, alt: "Indian family home with solar power" },
-  { src: indianVillage3, alt: "Green energy for Indian villages" },
+  { src: ruralIndia1, alt: "భారత గ్రామంలో సోలార్ ప్యానెల్స్" },
+  { src: southIndia1, alt: "దక్షిణ భారత గృహంలో సౌర విద్యుత్" },
+  { src: villageWomen1, alt: "గ్రామీణ భారతంలో మహిళలు మరియు సోలార్ శక్తి" },
+  { src: ruralIndia2, alt: "భారత గ్రామీణ గృహంలో టెర్రస్ సోలార్" },
+  { src: southIndia2, alt: "తెలుగు రాష్ట్రాల్లో సోలార్ విద్యుత్" },
+  { src: villageWomen2, alt: "గ్రామీణ స్వచ్ఛ ఇంధనం" },
+  { src: ruralIndia3, alt: "భారత గ్రామంలో పునరుత్పాదక శక్తి" },
+  { src: southIndia3, alt: "ఆంధ్రప్రదేశ్ తెలంగాణ సోలార్ గృహాలు" },
 ];
 
 function HeroCarousel() {

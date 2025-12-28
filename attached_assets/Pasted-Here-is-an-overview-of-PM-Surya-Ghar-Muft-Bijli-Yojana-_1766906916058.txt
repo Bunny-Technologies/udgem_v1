@@ -1,0 +1,115 @@
+Here is an overview of PM Surya Ghar: Muft Bijli Yojana (PM Suryaghar) — and what is known so far about its implementation/status in Andhra Pradesh (AP) and Telangana (TS).
+
+✅ What is PM Surya Ghar
+
+PM Surya Ghar is a nationwide scheme launched on 15 February 2024 by Ministry of New and Renewable Energy (MNRE). 
+
+Aim: to install rooftop solar panels on 1 crore households by 2027, allowing them to generate their own electricity — reducing dependence on conventional grid power, lowering electricity bills, and promoting clean energy. 
+
+Total budget/allocated outlay is ₹75,021 crore. 
+
+
+Key Benefits under the scheme
+
+Subsidy for rooftop solar installation: For residential houses, subsidy is available (see details below). 
+
+Households may get up to 300 units of “free” electricity per month — i.e. electricity from the rooftop solar panels which reduces their grid electricity use. 
+
+Option to sell surplus electricity (if generated more than household needs) back to the grid — helping households earn additional income. 
+
+Low-interest loans are also offered (in addition to subsidy), easing upfront cost burden. 
+
+
+Subsidy / Eligibility Structure
+
+According to the official/fairly recent guidelines: 
+
+Rooftop Solar System Capacity	Subsidy (per kW) / Subsidy details
+
+Up to 2 kW	₹ 30,000 per kW 
+From 2 kW up to 3 kW	Additional ₹ 18,000 per kW (i.e. total up to ₹ 78,000 subsidy) 
+> 3 kW	Maximum cap — subsidy remains at ₹ 78,000. 
+
+
+Eligibility broadly: Indian households owning a house with rooftop suitable for solar installation, with valid electricity connection. The scheme targets poor and middle-income households. 
+
+Application is through the national portal: https://pmsuryaghar.gov.in 
+
+Implementation period runs till March 2027. 
+
+
+---
+
+📍 Implementation in Andhra Pradesh
+
+The scheme is active in Andhra Pradesh — many households have already availed rooftop solar systems under PM Suryaghar. 
+
+As of 2025, under APEPDCL (Eastern Power Distribution Company), 10,000 rooftop solar units have been installed under PM Suryaghar across its distribution area. Total installed capacity: about 33,556 kW (i.e. ~33.5 MW), and around ₹77 crore in Central Financial Assistance (subsidy) has been disbursed. 
+
+In a recent push, APEPDCL signed an agreement to install rooftop solar plants in 44,998 homes belonging to Scheduled Caste / Scheduled Tribe (SC/ST) families across seven divisions of the state with combined capacity ~90 MW. 
+
+More broadly, across 11 districts in Andhra Pradesh, over 31,000 rooftop solar units have been commissioned under PM Suryaghar, totaling ~100 MW capacity. 
+
+The scheme in AP appears to be contributing to reduction in grid electricity dependence, and is being used by households to generate their own electricity (and possibly sell surplus). 
+
+
+Challenges/Progress Notes (AP):
+
+The uptake has been significant among households (especially under APEPDCL), including SC/ST households. 
+
+Subsidies + net-metering / grid connectivity + vendor network + awareness campaigns have helped. 
+
+
+
+---
+
+📍 Implementation & Status in Telangana
+
+The scheme is present officially in Telangana: TELANGANA STATE RENEWABLE ENERGY DEVELOPMENT CORPORATION (TSREDCO) appears in vendor / scheme documents for PM-Surya Ghar in the state. 
+
+Subsidy structure in Telangana under PM Surya Ghar mirrors the central scheme: ₹ 30,000/kW up to 2 kW; additional ₹ 18,000 per kW for up to 3 kW; total cap ₹ 78,000. 
+
+However, uptake in Telangana is reportedly low: there are media reports that many households are not showing interest in the scheme — lack of awareness, apprehensions about installation or performance are cited as reasons. 
+
+Implementation challenges have been highlighted: administrative hurdles, lower subsidy take-up, perhaps weaker vendor outreach or lack of community awareness — all affecting the rollout. 
+
+
+So, while the scheme is valid and operational in Telangana, its adoption seems much lower than in some other states (like AP), and progress appears slow. 
+
+
+---
+
+🔎 What this means for households / what you should check (if you are interested)
+
+If you or someone you know in Andhra Pradesh or Telangana wants to benefit from PM Surya Ghar:
+
+Check if your house has a rooftop suitable for solar panels and if you have a valid electricity connection.
+
+Visit the official portal (pmsuryaghar.gov.in) and register your application with required documents — Aadhaar, electricity consumer number, address, roof details, etc. 
+
+Choose a vendor from the approved list; installation, testing, commissioning are handled by them.
+
+After approval, solar panels get installed; you get subsidy (direct to bank account) and then you start consuming solar electricity — up to 300 units/month — potentially zero electricity bills.
+
+If you generate surplus electricity, you may sell/discharge it back to grid (depending on local DISCOM / net-metering rules).
+
+
+
+---
+
+⚠️ What’s uncertain / What to monitor
+
+In Telangana: very low adoption — possibly due to awareness or administrative delays. 
+
+The subsidy cap (₹ 78,000) may not cover full cost of solar installation beyond certain capacity — so consumer may bear some upfront cost (or take a loan). 
+
+Availability of registered/empanelled vendors in your area may affect ease and speed of installation.
+
+Net-metering or ability to sell surplus to grid depends on local DISCOM regulations.
+
+
+
+---
+
+If you like — I can check current(2025) status** of PM Surya Ghar in Andhra Pradesh + Telangana — number of applications vs installations, capacity installed vs target.
+Do you want me to build that report for you now?

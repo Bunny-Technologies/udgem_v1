@@ -1,0 +1,455 @@
+You are an expert full-stack engineer and product designer.
+
+Build a complete, production-ready web application for:
+
+  “UdGEM – Uday Green Economy Mission”
+  Focus: PM Surya Ghar – Muft Bijli Yojana rooftop solar awareness & lead collection
+  Location focus: Andhra Pradesh (AP) and Telangana (TS), India.
+
+====================================================
+TECH + PROJECT SETUP
+====================================================
+Tech stack (opinionated):
+
+- Backend: Python 3 + Flask
+- Frontend: Jinja2 templates with HTML5 + CSS + vanilla JS
+- Styling: Bootstrap 5 (CDN) + a small custom CSS file for UdGEM branding
+- Database: SQLite using SQLAlchemy ORM
+- Structure:
+    - app.py              (Flask main app and routes)
+    - models.py           (SQLAlchemy models)
+    - forms.py (optional) (WTForms or simple validation helpers – your choice)
+    - /templates/*.html   (Jinja templates)
+    - /static/css/style.css
+    - /static/js/main.js
+    - /static/images/flyers/  (placeholder paths for flyers)
+    - README.md with how to run on Replit
+
+Replit specifics:
+- App must run with `python app.py`
+- Bind to host 0.0.0.0 with a configurable port via `PORT` env variable
+- Provide minimal instructions in README for setting env vars:
+    - FLASK_ENV
+    - SECRET_KEY
+    - ADMIN_PASSWORD
+
+====================================================
+BRANDING + UI GUIDELINES
+====================================================
+Overall goal: App should feel like a small, modern NGO/government-mission site.
+
+Brand personality:
+- Trustworthy, public-service, clean energy, “for the people”.
+- Mix of government-style seriousness + approachable, friendly tone.
+
+Color palette (inspired by provided flyers):
+- Primary: Deep blue (#003b73 or similar)
+- Secondary: Bright solar yellow (#ffc400 or similar)
+- Accent: Fresh green (#008c4a or similar)
+- Background: Very light gray/white sections for content
+
+Typography:
+- Use Google Fonts via CDN: "Poppins" or "Inter"
+- Headings: bold, all-caps or title case
+- Body text: regular, high line-height for readability
+
+Layout:
+- Responsive mobile-first design
+- Top navigation bar fixed to top with logo text “UdGEM” on the left, menu on the right
+- Content max width around 1100–1200px centered
+- Generous vertical spacing between sections (at least 60–80px)
+- Use Bootstrap grid for cards & columns
+
+Components to use:
+- Hero sections with big headings and CTA buttons
+- Card decks (3- or 4-column on desktop, stacked on mobile)
+- Highlight boxes with icons for key benefits
+- A simple “stat counters” area for Impact
+- A slider or carousel that shows flyer images
+
+====================================================
+CONTENT & PAGES
+====================================================
+Use this navigation:
+
+- Home
+- About
+- PM Surya Ghar
+- AP & TS Status
+- Apply
+- Impact
+- Contact
+- (hidden in nav) Admin
+
+Assume we have flyer images under:
+- /static/images/flyers/flyer1.jpeg
+- /static/images/flyers/flyer2.jpeg
+- /static/images/flyers/flyer3.jpeg
+- /static/images/flyers/flyer4.jpeg
+
+Use those in carousels/hero where appropriate.
+
+--------------------------------------------
+1) BASE LAYOUT (base.html)
+--------------------------------------------
+Create base.html with:
+
+- Fixed top navbar:
+    - Brand: “UdGEM” (left, bold)
+    - Menu: Home, About, PM Surya Ghar, AP & TS Status, Impact, Apply, Contact
+    - On mobile: collapse into hamburger
+- Footer:
+    - “© UdGEM – Uday Green Economy Mission”
+    - Contact snippet: “info@udgem.in | +91 93999 99047 / +91 73372 63156”
+    - Links to important pages
+- `{% block content %}` for individual pages
+- Include BootstrapCSS, Google Font, and custom style.css
+- Include main.js at bottom
+
+--------------------------------------------
+2) HOME PAGE (route: "/")
+--------------------------------------------
+Purpose: Quick overview + call-to-action.
+
+Hero section:
+- Left: Text
+    - H1: “Udaya Green Economy Mission (UdGEM)”
+    - Subheading: “For the People, For the Nation, For Future Generations”
+    - Two buttons:
+        - “Check Your Subsidy” – scrolls/jumps to PM Surya Ghar page
+        - “Apply Now” – goes to /apply
+- Right: Bootstrap carousel cycling through the flyer images.
+
+Mission summary section:
+- Heading: “Mission One Lakh Houses”
+- Content:
+    - Explain: UdGEM’s goal is to enable rooftop solar on 1,00,000 homes
+    - Target capacity ~3,00,000 kW (3 lakh kW)
+    - 30+ years of clean energy, zero power bills, fossil fuel savings
+
+3 cards below hero:
+- Card 1: “Zero Power Bills for 30 Years”
+  Text: “Lock in your energy cost with rooftop solar. Avoid future tariff hikes and surcharges.”
+- Card 2: “Bank EMI Instead of Power Bill”
+  Text: “Use low-interest loans so your EMI replaces your electricity bill.”
+- Card 3: “Supports India’s Net-Zero & SDGs”
+  Text: “Contribute to climate action, green jobs, and reduced poverty.”
+
+A small “How It Works” timeline:
+- Step 1: Understand PM Surya Ghar
+- Step 2: Check your eligibility & subsidy
+- Step 3: Submit interest on UdGEM site
+- Step 4: Complete application on official government portal
+- Step 5: Install rooftop solar and enjoy free power
+
+--------------------------------------------
+3) ABOUT PAGE ("/about")
+--------------------------------------------
+Sections:
+
+A) “Who We Are”
+- Text: UdGEM (Udaya Green Economy Mission) is a green-economy initiative working on rooftop solar & sustainable projects, starting with PM Surya Ghar in AP & TS.
+
+B) Mission & Vision cards:
+- Mission: “Transform how people live and work by offering user-friendly, future-forward green solutions.”
+- Vision: “To become a leading global player in green economy projects and sustainable solar for all.”
+
+C) “Why UdGEM?”
+- Bullets such as:
+  - End-to-end guidance for PM Surya Ghar applicants.
+  - Focus on poor and middle-income families.
+  - Strong local presence in AP & TS.
+  - Transparent information about subsidies and loans.
+
+D) “Who Benefits?”
+- Households (poor/middle income)
+- Urban and rural families
+- SC/ST households through special drives
+- Future generations via clean environment
+
+--------------------------------------------
+4) PM SURYA GHAR PAGE ("/pm-surya-ghar")
+--------------------------------------------
+Explain PM Surya Ghar scheme clearly using user-friendly text.
+
+Important points to include:
+- Launched by MNRE in Feb 2024.
+- Goal: rooftop solar for 1 crore homes by March 2027.
+- Benefits:
+  - Up to 300 units/month “free” via solar generation.
+  - Reduced dependence on DISCOM bills.
+  - Option to sell surplus power to grid (net-metering).
+  - Central subsidy directly to beneficiary’s bank.
+  - Low-interest loans (~7%) without collateral for up to 3 kW.
+
+Subsidy slab table (as HTML table):
+- 0–2 kW: ₹30,000 per kW
+- 2–3 kW: additional ₹18,000 per kW
+- Above 3 kW: total subsidy capped at ₹78,000
+
+Note: Important disclaimer:
+- Final eligibility and approval decisions are made by the government; UdGEM only provides guidance, awareness and support.
+
+=============================
+Subsidy Calculator (on this page)
+=============================
+Implement calculator UI and logic:
+
+Inputs:
+- `avg_units` (Average monthly consumption in units)
+- `capacity_kw` (Desired system size in kW, float allowed)
+
+On “Calculate” button click:
+- Use simple matching rules:
+  - If avg_units <= 150 → recommended 1–2 kW
+  - 150 < avg_units <= 300 → recommended 2–3 kW
+  - >300 → recommended >3 kW (cap at subsidy maximum)
+- Subsidy calculation logic:
+  - If capacity_kw <= 2:
+      subsidy = 30000 * capacity_kw
+  - If 2 < capacity_kw <= 3:
+      subsidy = 30000 * 2 + 18000 * (capacity_kw - 2)
+  - If capacity_kw > 3:
+      subsidy = 30000 * 2 + 18000 * 1   (cap = 78,000)
+- Display:
+  - “Recommended system size” message based on units
+  - “Estimated subsidy: ₹XX,XXX”
+  - Short explanation string
+
+Implementation details:
+- Do calculation in main.js using JS, no page reload.
+- If invalid input (blank or negative), show Bootstrap alert.
+
+--------------------------------------------
+5) AP & TS STATUS PAGE ("/ap-ts-status")
+--------------------------------------------
+This page summarizes implementation status in Andhra Pradesh and Telangana based on provided brief.
+
+Structure:
+
+Section 1: Intro
+- Short paragraph introducing that this page represents publicly known information about scheme implementation in AP & TS.
+
+Section 2: Andhra Pradesh (AP)
+- Use cards or bullet lists for:
+  - Scheme is active; many rooftop systems commissioned.
+  - Under APEPDCL, around 10,000 rooftop units with total ~33.5 MW capacity and ~₹77 crore CFA disbursed (numbers are illustrative, mark as “approximate / to be updated”).
+  - Plan for ~44,998 SC/ST households with ~90 MW.
+  - Overall ~100 MW rooftop solar across 11 districts (approximate).
+  - Mention positive adoption, awareness efforts, SC/ST focus.
+
+Section 3: Telangana (TS)
+- Highlight:
+  - Scheme exists and TSREDCO is the nodal body.
+  - Same subsidy structure as central scheme.
+  - Uptake reportedly lower; reasons include lack of awareness, administrative hurdles, vendor outreach challenges.
+  - Emphasize UdGEM aims to help bridge this gap by awareness + hand-holding.
+
+Section 4: “What you should do”
+- Short checklist:
+  - Check rooftop suitability.
+  - Understand subsidy and costs.
+  - Register interest via UdGEM (/apply) and then via official portal.
+
+Section 5: Note
+- Provide disclaimer that these numbers are illustrative and must be updated periodically from official sources.
+
+--------------------------------------------
+6) IMPACT PAGE ("/impact")
+--------------------------------------------
+This page tells the story using SDG framing.
+
+Sections:
+
+A) “Why Rooftop Solar Matters”
+- Paragraphs explaining:
+  - Reduced fossil fuel usage
+  - Savings on national foreign exchange/gold reserves used for fossil import
+  - Household financial stability due to predictable power costs
+
+B) SDG Cards (4 cards):
+- SDG 7 – Affordable & Clean Energy
+- SDG 13 – Climate Action
+- SDG 1 – No Poverty / SDG 10 – Reduced Inequalities
+- SDG 11 – Sustainable Cities & Communities
+
+Each card should have:
+- Icon (use FontAwesome or Bootstrap icons)
+- Short 2–3 line description
+
+C) “Mission One Lakh Houses – Impact Projections”
+- Simple counter components (can be purely front-end, set via JS):
+  - “Target homes” = 100,000
+  - “Target capacity” = 300,000 kW
+  - “Estimated yearly CO₂ avoided” using 0.8 tCO2 per kW/year = capacity * 0.8
+- Show as large numbers with subtle animated count-up on scroll (if easy).
+
+--------------------------------------------
+7) APPLY PAGE ("/apply")
+--------------------------------------------
+Purpose: capture leads for people interested in PM Surya Ghar via UdGEM.
+
+Text at top:
+- Explain that this form is for interest + guidance only.
+- Formal subsidy application happens on official government portal (pmsuryaghar.gov.in). UdGEM helps with awareness, documentation & vendor linking.
+
+Form (POST to /apply):
+- Full Name (required)
+- Mobile Number (required)
+- Email (required)
+- State (dropdown: Andhra Pradesh, Telangana, Other)
+- District / City
+- Full Address
+- Household Type (dropdown: Independent house, Apartment, Other)
+- Ownership (Owner, Tenant)
+- Monthly electricity consumption (units, int)
+- Proposed solar capacity (kW, float)
+- DISCOM / Consumer number (optional)
+- Category (dropdown: General, OBC, SC, ST, Other)
+- How did you hear about UdGEM? (Friend/Family, Social Media, NGO, Newspaper, Other)
+- Free text “Questions or notes”
+
+Validation:
+- Server-side (Flask) validation for required fields.
+- If validation fails, show Bootstrap alerts with messages and preserve entered data.
+
+DB model `Lead` (SQLAlchemy):
+- id (int, PK)
+- name, phone, email
+- state, district, address
+- household_type, ownership
+- monthly_units (int)
+- proposed_kw (float)
+- discom_number
+- category
+- referral_source
+- notes
+- created_at (datetime with default = now)
+
+After successful submit:
+- Save record
+- Redirect to `/thank-you`
+
+--------------------------------------------
+8) THANK YOU PAGE ("/thank-you")
+--------------------------------------------
+Simple friendly message:
+- “Thank you for your interest in PM Surya Ghar with UdGEM.”
+- “Our team will contact you within 3–5 working days.”
+- Button: “Back to Home” and “Learn more about PM Surya Ghar”.
+
+--------------------------------------------
+9) CONTACT PAGE ("/contact")
+--------------------------------------------
+Content:
+
+Left column:
+- Contact info:
+  - Email: info@udgem.in
+  - Website: udgem.in
+  - Phone numbers:
+    - N. Uday Bhaskara Rao – +91 93999 99047
+    - Dr A.V. Sreelakshmi – +91 73372 63156
+- Short text encouraging people to call/WhatsApp for guidance.
+
+Right column:
+- Simple contact form:
+  - Name, Email, Message (text area)
+- Save submissions into `ContactMessage` table:
+  - id, name, email, message, created_at
+- After submit, show a success alert in the same page (no redirect needed).
+
+Optional bottom section:
+- Static embed map iframe (can point to Amaravati or Hyderabad as placeholder).
+
+--------------------------------------------
+10) ADMIN DASHBOARD ("/admin" + related routes)
+--------------------------------------------
+Security:
+- Use Flask sessions.
+- Configure `SECRET_KEY` from env var.
+- Simple password-based login; path `/admin/login` or same `/admin` if not logged in.
+- Compare submitted password with `ADMIN_PASSWORD` env var.
+- If logged in, store `session['is_admin'] = True`.
+
+Main admin page features:
+- Show KPIs at top:
+  - Total number of leads
+  - Leads by state (AP, TS, Other)
+  - Average proposed system size
+- Table listing all leads:
+  - Columns: id, name, phone, state, district, monthly_units, proposed_kw, created_at
+  - Ability to sort or at least search with a small search box (client-side JS filter is fine).
+
+Filters:
+- Dropdown filter by state (All/AP/TS/Other).
+
+Export:
+- Button “Download CSV” that triggers route `/admin/export-leads`:
+  - Only accessible if admin logged in.
+  - Streams CSV of all leads.
+
+Contact messages:
+- Another section/tab in the dashboard listing messages from `ContactMessage`, with columns: id, name, email, message, created_at.
+
+Logout:
+- Simple “Logout” button that clears session.
+
+--------------------------------------------
+11) MODELS & DB INITIALIZATION
+--------------------------------------------
+Use SQLAlchemy.
+
+Models:
+- Lead (as defined above)
+- ContactMessage (id, name, email, message, created_at)
+
+Provide a helper function `init_db()` that:
+- Creates all tables if they don’t exist.
+- Called on app start before first request.
+
+--------------------------------------------
+12) STATIC ASSETS & STYLING
+--------------------------------------------
+style.css:
+- Define:
+  - .hero { min-height: 70vh; display:flex; align-items:center; }
+  - .hero-title, .section-title styling
+  - Color classes for background strips (e.g., .bg-udgem-blue, .bg-udgem-light)
+  - Footer styling
+- Ensure text is high contrast and legible.
+
+main.js:
+- Implement:
+  - Smooth scrolling for internal links (e.g., from Home CTA to PM Surya Ghar section)
+  - Subsidy calculator logic (see above)
+  - Simple count-up animation for numbers on Impact page
+
+Carousel:
+- Use Bootstrap’s carousel component referencing the 3–4 flyer images.
+
+--------------------------------------------
+13) README.md
+--------------------------------------------
+Explain clearly:
+
+- Project name and purpose.
+- How to run in Replit:
+    - Set env vars:
+        - SECRET_KEY = some random string
+        - ADMIN_PASSWORD = your chosen admin password
+    - Run `python app.py`
+- Default flyer image filenames and where to upload them (`static/images/flyers/`).
+- How to access admin dashboard (`/admin`) and log in.
+- Note that all numbers (like MW capacity, households) in AP & TS status are illustrative and should be updated from official data.
+
+====================================================
+IMPORTANT
+====================================================
+- Generate all files (app.py, models.py, templates, static, README) inside the Replit project.
+- Make sure application runs successfully from a clean clone with sample DB.
+- Keep code well-commented, especially:
+    - Subsidy logic
+    - Admin auth
+    - Database models
+- Ensure UI looks consistent, modern, and easy to read on mobile phones.

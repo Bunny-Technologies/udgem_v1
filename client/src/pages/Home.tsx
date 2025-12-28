@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
 import SolarImpactSlider from "@/components/SolarImpactSlider";
+import AdBanner from "@/components/AdBanner";
 
 import teluguVillageHome from "@assets/generated_images/telugu_village_home_with_solar.png";
 import indianWomanSolar from "@assets/generated_images/indian_woman_with_solar_power.png";
@@ -194,68 +195,75 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
-              {t("Mission One Lakh Houses", "మిషన్ ఒక లక్ష ఇళ్ళు")}
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              {t(
-                "UdGEM's goal is to enable rooftop solar on 1,00,000 homes with target capacity of 3,00,000 kW, providing 30+ years of clean energy and zero power bills.",
-                "UdGEM లక్ష్యం 1,00,000 ఇళ్లపై రూఫ్‌టాప్ సోలార్ ఏర్పాటు చేయడం, 3,00,000 kW సామర్థ్యంతో 30+ సంవత్సరాల పరిశుభ్రమైన శక్తిని అందించడం."
-              )}
-            </p>
-          </div>
+      {/* Main content with ad banner */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex gap-6">
+          {/* Main content */}
+          <div className="flex-1 min-w-0">
+            <section className="section">
+              <div className="text-center mb-12">
+                <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
+                  {t("Mission One Lakh Houses", "మిషన్ ఒక లక్ష ఇళ్ళు")}
+                </h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                  {t(
+                    "UdGEM's goal is to enable rooftop solar on 1,00,000 homes with target capacity of 3,00,000 kW, providing 30+ years of clean energy and zero power bills.",
+                    "UdGEM లక్ష్యం 1,00,000 ఇళ్లపై రూఫ్‌టాప్ సోలార్ ఏర్పాటు చేయడం, 3,00,000 kW సామర్థ్యంతో 30+ సంవత్సరాల పరిశుభ్రమైన శక్తిని అందించడం."
+                  )}
+                </p>
+              </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {features.map((feature, index) => (
-              <Card 
-                key={index} 
-                className="border border-border/50 bg-card hover:shadow-lg transition-shadow"
-                data-testid={`card-feature-${index}`}
-              >
-                <CardContent className="p-6">
-                  <div className="h-12 w-12 bg-solar/10 rounded-lg flex items-center justify-center mb-4">
-                    <feature.icon className="h-6 w-6 text-solar" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+              <div className="grid md:grid-cols-3 gap-6">
+                {features.map((feature, index) => (
+                  <Card 
+                    key={index} 
+                    className="border border-border/50 bg-card hover:shadow-lg transition-shadow"
+                    data-testid={`card-feature-${index}`}
+                  >
+                    <CardContent className="p-6">
+                      <div className="h-12 w-12 bg-solar/10 rounded-lg flex items-center justify-center mb-4">
+                        <feature.icon className="h-6 w-6 text-solar" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
 
-      <section className="section bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
-              {t("How It Works", "ఇది ఎలా పనిచేస్తుంది")}
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              {t("Simple steps to get your rooftop solar system installed with government subsidy", "ప్రభుత్వ సబ్సిడీతో మీ రూఫ్‌టాప్ సోలార్ సిస్టమ్ ఇన్‌స్టాల్ చేసుకోవడానికి సులభ దశలు")}
-            </p>
-          </div>
+            <section className="section">
+              <div className="text-center mb-12">
+                <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
+                  {t("How It Works", "ఇది ఎలా పనిచేస్తుంది")}
+                </h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  {t("Simple steps to get your rooftop solar system installed with government subsidy", "ప్రభుత్వ సబ్సిడీతో మీ రూఫ్‌టాప్ సోలార్ సిస్టమ్ ఇన్‌స్టాల్ చేసుకోవడానికి సులభ దశలు")}
+                </p>
+              </div>
 
-          <div className="relative">
-            <div className="hidden md:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-primary via-solar to-green-500"></div>
-            
-            <div className="grid md:grid-cols-5 gap-6">
-              {steps.map((item) => (
-                <div key={item.step} className="relative text-center" data-testid={`step-${item.step}`}>
-                  <div className="relative z-10 w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold shadow-lg">
-                    {item.step}
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-2 text-sm">{item.title}</h3>
-                  <p className="text-xs text-muted-foreground">{item.description}</p>
+              <div className="relative">
+                <div className="hidden md:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-primary via-solar to-green-500"></div>
+                
+                <div className="grid md:grid-cols-5 gap-6">
+                  {steps.map((item) => (
+                    <div key={item.step} className="relative text-center" data-testid={`step-${item.step}`}>
+                      <div className="relative z-10 w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold shadow-lg">
+                        {item.step}
+                      </div>
+                      <h3 className="font-semibold text-foreground mb-2 text-sm">{item.title}</h3>
+                      <p className="text-xs text-muted-foreground">{item.description}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            </section>
           </div>
+
+          {/* Ad Banner on the right */}
+          <AdBanner />
         </div>
-      </section>
+      </div>
 
       <section className="section bg-primary text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

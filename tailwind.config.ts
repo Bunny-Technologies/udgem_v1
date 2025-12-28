@@ -81,6 +81,15 @@ export default {
           busy: "rgb(239 68 68)",
           offline: "rgb(156 163 175)",
         },
+        solar: {
+          DEFAULT: "#ffc400",
+          dark: "#e6b000",
+        },
+        green: {
+          400: "#4ade80",
+          500: "#22c55e",
+          600: "#16a34a",
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)"],

@@ -1,20 +1,32 @@
-import { type User, type InsertUser } from "@shared/schema";
+import { 
+  type User, 
+  type InsertUser, 
+  type Application, 
+  type ApplicationData,
+  type Contact,
+  type ContactData 
+} from "@shared/schema";
 import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  createApplication(data: ApplicationData): Promise<Application>;
+  getApplications(): Promise<Application[]>;
+  createContact(data: ContactData): Promise<Contact>;
+  getContacts(): Promise<Contact[]>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
+  private applications: Map<string, Application>;
+  private contacts: Map<string, Contact>;
 
   constructor() {
     this.users = new Map();
+    this.applications = new Map();
+    this.contacts = new Map();
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -32,6 +44,40 @@ export class MemStorage implements IStorage {
     const user: User = { ...insertUser, id };
     this.users.set(id, user);
     return user;
+  }
+
+  async createApplication(data: ApplicationData): Promise<Application> {
+    const id = randomUUID();
+    const application: Application = {
+      ...data,
+      id,
+      createdAt: new Date(),
+    };
+    this.applications.set(id, application);
+    return application;
+  }
+
+  async getApplications(): Promise<Application[]> {
+    return Array.from(this.applications.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
+  }
+
+  async createContact(data: ContactData): Promise<Contact> {
+    const id = randomUUID();
+    const contact: Contact = {
+      ...data,
+      id,
+      createdAt: new Date(),
+    };
+    this.contacts.set(id, contact);
+    return contact;
+  }
+
+  async getContacts(): Promise<Contact[]> {
+    return Array.from(this.contacts.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
   }
 }
 

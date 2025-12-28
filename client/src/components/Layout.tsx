@@ -2,6 +2,7 @@ import { Link, useLocation } from "wouter";
 import { Menu, X, Sun, Phone, Mail, MapPin, Globe } from "lucide-react";
 import { useState } from "react";
 import { useLanguage, type Language } from "@/context/LanguageContext";
+import ChatBot from "@/components/ChatBot";
 
 const navLinksData = {
   en: [
@@ -199,6 +200,7 @@ export default function Layout({ children }: LayoutProps) {
         {children}
       </main>
       <Footer />
+      <ChatBot />
     </div>
   );
 }

@@ -5,7 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "wouter";
-import Layout, { useLanguage } from "@/components/Layout";
+import Layout from "@/components/Layout";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function PMSuryaGhar() {
   const { t } = useLanguage();

@@ -11,7 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import Layout, { useLanguage } from "@/components/Layout";
+import Layout from "@/components/Layout";
+import { useLanguage } from "@/context/LanguageContext";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),

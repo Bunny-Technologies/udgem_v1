@@ -1,22 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Menu, X, Sun, Phone, Mail, MapPin, Globe } from "lucide-react";
-import { useState, createContext, useContext } from "react";
-
-type Language = "en" | "te";
-
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (en: string, te: string) => string;
-}
-
-const LanguageContext = createContext<LanguageContextType>({
-  language: "en",
-  setLanguage: () => {},
-  t: (en) => en,
-});
-
-export const useLanguage = () => useContext(LanguageContext);
+import { useState } from "react";
+import { useLanguage, type Language } from "@/context/LanguageContext";
 
 const navLinksData = {
   en: [
@@ -35,7 +20,9 @@ const navLinksData = {
   ],
 };
 
-function LanguageBar({ language, setLanguage }: { language: Language; setLanguage: (lang: Language) => void }) {
+function LanguageBar() {
+  const { language, setLanguage } = useLanguage();
+
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] bg-primary/95 border-b border-white/10" data-testid="language-bar">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,20 +53,21 @@ function LanguageBar({ language, setLanguage }: { language: Language; setLanguag
   );
 }
 
-function Navbar({ language }: { language: Language }) {
+function Navbar() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language } = useLanguage();
   const navLinks = navLinksData[language];
 
   return (
-    <nav className="fixed top-8 left-0 right-0 z-50 bg-primary shadow-md" data-testid="navbar">
+    <nav className="fixed top-8 left-0 right-0 z-50 bg-primary shadow-lg" data-testid="navbar">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2" data-testid="link-brand">
+        <div className="flex justify-between items-center h-16">
+          <Link href="/" className="flex items-center gap-2" data-testid="link-logo">
             <Sun className="h-8 w-8 text-solar" />
-            <span className="text-xl font-semibold text-white tracking-tight">UdGEM</span>
+            <span className="text-xl font-bold text-white">UdGEM</span>
           </Link>
-          
+
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
@@ -98,8 +86,9 @@ function Navbar({ language }: { language: Language }) {
           </div>
 
           <button
-            className="md:hidden p-2 text-white"
+            className="md:hidden p-2 rounded-md text-white hover:bg-white/10"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
             data-testid="button-mobile-menu"
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -132,8 +121,8 @@ function Navbar({ language }: { language: Language }) {
   );
 }
 
-function Footer({ language }: { language: Language }) {
-  const t = (en: string, te: string) => language === "en" ? en : te;
+function Footer() {
+  const { language, t } = useLanguage();
   const navLinks = navLinksData[language];
 
   return (
@@ -202,20 +191,14 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const [language, setLanguage] = useState<Language>("te");
-  
-  const t = (en: string, te: string) => language === "en" ? en : te;
-
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      <div className="min-h-screen flex flex-col bg-background">
-        <LanguageBar language={language} setLanguage={setLanguage} />
-        <Navbar language={language} />
-        <main className="flex-1 pt-24">
-          {children}
-        </main>
-        <Footer language={language} />
-      </div>
-    </LanguageContext.Provider>
+    <div className="min-h-screen flex flex-col bg-background">
+      <LanguageBar />
+      <Navbar />
+      <main className="flex-1 pt-24">
+        {children}
+      </main>
+      <Footer />
+    </div>
   );
 }

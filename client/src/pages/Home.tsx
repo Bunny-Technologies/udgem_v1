@@ -2,7 +2,8 @@ import { Link } from "wouter";
 import { Sun, Zap, Building, Leaf, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import Layout, { useLanguage } from "@/components/Layout";
+import Layout from "@/components/Layout";
+import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
 
 import solarRooftop1 from "@assets/stock_images/rooftop_solar_panels_2de590f5.jpg";

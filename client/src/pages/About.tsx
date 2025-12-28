@@ -1,6 +1,7 @@
 import { Users, Target, Eye, CheckCircle, Heart, Home, Globe } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import Layout, { useLanguage } from "@/components/Layout";
+import Layout from "@/components/Layout";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function About() {
   const { t } = useLanguage();

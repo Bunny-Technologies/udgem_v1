@@ -2,7 +2,8 @@ import { Link } from "wouter";
 import { CheckCircle, ArrowRight, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import Layout, { useLanguage } from "@/components/Layout";
+import Layout from "@/components/Layout";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ThankYou() {
   const { t } = useLanguage();

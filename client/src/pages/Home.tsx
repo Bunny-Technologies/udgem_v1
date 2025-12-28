@@ -5,12 +5,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import Layout from "@/components/Layout";
 import { useState, useEffect } from "react";
 
-import flyer1 from "@assets/WhatsApp_Image_2025-12-17_at_13.34.40_1766909816936.jpeg";
-import flyer2 from "@assets/WhatsApp_Image_2025-12-17_at_13.34.42_1766909816935.jpeg";
-import flyer3 from "@assets/WhatsApp_Image_2025-12-17_at_13.34.42_(1)_1766909816934.jpeg";
-import flyer4 from "@assets/WhatsApp_Image_2025-12-17_at_13.34.39_1766909816936.jpeg";
 import solarRooftop1 from "@assets/stock_images/rooftop_solar_panels_2de590f5.jpg";
 import solarRooftop2 from "@assets/stock_images/rooftop_solar_panels_e16d52a0.jpg";
+import solarInstall1 from "@assets/stock_images/solar_panel_installa_52f9b98a.jpg";
+import solarInstall2 from "@assets/stock_images/solar_panel_installa_b21e2dd8.jpg";
+import solarInstall3 from "@assets/stock_images/solar_panel_installa_5f030dcd.jpg";
+import solarEnergy1 from "@assets/stock_images/solar_energy_green_e_1018ab3a.jpg";
+import solarEnergy2 from "@assets/stock_images/solar_energy_green_e_2e7b8f21.jpg";
 
 const features = [
   {
@@ -39,12 +40,13 @@ const steps = [
 ];
 
 const carouselImages = [
-  { src: flyer1, alt: "UdGEM PM Surya Ghar - Invest in Solar" },
-  { src: flyer2, alt: "UdGEM Rooftop Solar - Subsidy Scheme" },
-  { src: flyer3, alt: "UdGEM PM Surya Ghar Muft Bijli Yojana" },
-  { src: flyer4, alt: "UdGEM Rooftop Solar Telugu" },
   { src: solarRooftop1, alt: "Residential rooftop solar installation" },
   { src: solarRooftop2, alt: "Solar panels on house roof" },
+  { src: solarInstall1, alt: "Professional solar panel installation" },
+  { src: solarInstall2, alt: "Rooftop solar system setup" },
+  { src: solarInstall3, alt: "Home solar power installation" },
+  { src: solarEnergy1, alt: "Clean green solar energy" },
+  { src: solarEnergy2, alt: "Sustainable solar power" },
 ];
 
 function HeroCarousel() {

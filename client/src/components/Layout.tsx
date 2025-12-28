@@ -1,21 +1,78 @@
 import { Link, useLocation } from "wouter";
-import { Menu, X, Sun, Phone, Mail, MapPin } from "lucide-react";
-import { useState } from "react";
+import { Menu, X, Sun, Phone, Mail, MapPin, Globe } from "lucide-react";
+import { useState, createContext, useContext } from "react";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/pm-surya-ghar", label: "PM Surya Ghar" },
-  { href: "/apply", label: "Apply" },
-  { href: "/contact", label: "Contact" },
-];
+type Language = "en" | "te";
 
-function Navbar() {
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (en: string, te: string) => string;
+}
+
+const LanguageContext = createContext<LanguageContextType>({
+  language: "en",
+  setLanguage: () => {},
+  t: (en) => en,
+});
+
+export const useLanguage = () => useContext(LanguageContext);
+
+const navLinksData = {
+  en: [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/pm-surya-ghar", label: "PM Surya Ghar" },
+    { href: "/apply", label: "Apply" },
+    { href: "/contact", label: "Contact" },
+  ],
+  te: [
+    { href: "/", label: "హోమ్" },
+    { href: "/about", label: "గురించి" },
+    { href: "/pm-surya-ghar", label: "PM సూర్య ఘర్" },
+    { href: "/apply", label: "దరఖాస్తు" },
+    { href: "/contact", label: "సంప్రదించండి" },
+  ],
+};
+
+function LanguageBar({ language, setLanguage }: { language: Language; setLanguage: (lang: Language) => void }) {
+  return (
+    <div className="fixed top-0 left-0 right-0 z-[60] bg-primary/95 border-b border-white/10" data-testid="language-bar">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-end gap-2 h-8">
+          <Globe className="h-4 w-4 text-white/70" />
+          <button
+            onClick={() => setLanguage("en")}
+            className={`px-2 py-0.5 text-xs font-medium rounded transition-colors ${
+              language === "en" ? "bg-solar text-primary" : "text-white/80 hover:text-white"
+            }`}
+            data-testid="button-lang-en"
+          >
+            English
+          </button>
+          <span className="text-white/40">|</span>
+          <button
+            onClick={() => setLanguage("te")}
+            className={`px-2 py-0.5 text-xs font-medium rounded transition-colors ${
+              language === "te" ? "bg-solar text-primary" : "text-white/80 hover:text-white"
+            }`}
+            data-testid="button-lang-te"
+          >
+            తెలుగు
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Navbar({ language }: { language: Language }) {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navLinks = navLinksData[language];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-md" data-testid="navbar">
+    <nav className="fixed top-8 left-0 right-0 z-50 bg-primary shadow-md" data-testid="navbar">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2" data-testid="link-brand">
@@ -28,7 +85,7 @@ function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                data-testid={`link-nav-${link.href.replace(/\//g, '') || 'home'}`}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   location === link.href
                     ? "bg-white/20 text-white"
@@ -57,7 +114,7 @@ function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                data-testid={`link-mobile-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                data-testid={`link-mobile-nav-${link.href.replace(/\//g, '') || 'home'}`}
                 className={`block px-4 py-3 rounded-md text-sm font-medium transition-colors ${
                   location === link.href
                     ? "bg-white/20 text-white"
@@ -74,6 +131,8 @@ function Navbar() {
     </nav>
   );
 }
+
+const navLinks = navLinksData.en;
 
 function Footer() {
   return (
@@ -139,13 +198,20 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
+  const [language, setLanguage] = useState<Language>("en");
+  
+  const t = (en: string, te: string) => language === "en" ? en : te;
+
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Navbar />
-      <main className="flex-1 pt-16">
-        {children}
-      </main>
-      <Footer />
-    </div>
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+      <div className="min-h-screen flex flex-col bg-background">
+        <LanguageBar language={language} setLanguage={setLanguage} />
+        <Navbar language={language} />
+        <main className="flex-1 pt-24">
+          {children}
+        </main>
+        <Footer />
+      </div>
+    </LanguageContext.Provider>
   );
 }

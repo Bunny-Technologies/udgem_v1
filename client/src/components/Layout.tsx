@@ -21,49 +21,17 @@ const navLinksData = {
   ],
 };
 
-function LanguageBar() {
-  const { language, setLanguage } = useLanguage();
-
-  return (
-    <div className="fixed top-0 left-0 right-0 z-[60] bg-primary/95 border-b border-white/10" data-testid="language-bar">
-      <div className="w-full px-4">
-        <div className="flex items-center justify-end gap-2 h-8">
-          <Globe className="h-4 w-4 text-white/70" />
-          <button
-            onClick={() => setLanguage("en")}
-            className={`px-2 py-0.5 text-xs font-medium rounded transition-colors ${
-              language === "en" ? "bg-solar text-primary" : "text-white/80 hover:text-white"
-            }`}
-            data-testid="button-lang-en"
-          >
-            English
-          </button>
-          <span className="text-white/40">|</span>
-          <button
-            onClick={() => setLanguage("te")}
-            className={`px-2 py-0.5 text-xs font-medium rounded transition-colors ${
-              language === "te" ? "bg-solar text-primary" : "text-white/80 hover:text-white"
-            }`}
-            data-testid="button-lang-te"
-          >
-            తెలుగు
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function Navbar() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { language } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const navLinks = navLinksData[language];
 
   return (
-    <nav className="fixed top-8 left-0 right-0 z-50 bg-primary shadow-lg" data-testid="navbar">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-lg" data-testid="navbar">
       <div className="w-full px-4">
-        <div className="flex items-center h-16">
+        <div className="flex items-center h-14">
           <Link href="/" className="flex items-center gap-2 flex-shrink-0" data-testid="link-logo">
             <Sun className="h-8 w-8 text-solar" />
             <span className="text-xl font-bold text-white">UdGEM</span>
@@ -95,7 +63,27 @@ function Navbar() {
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
           
-          <div className="hidden md:block w-24"></div>
+          <div className="hidden md:flex items-center gap-2 flex-shrink-0">
+            <Globe className="h-4 w-4 text-white/70" />
+            <button
+              onClick={() => setLanguage("en")}
+              className={`px-2 py-1 text-xs font-medium rounded transition-colors ${
+                language === "en" ? "bg-solar text-primary" : "text-white/80 hover:text-white"
+              }`}
+              data-testid="button-lang-en"
+            >
+              English
+            </button>
+            <button
+              onClick={() => setLanguage("te")}
+              className={`px-2 py-1 text-xs font-medium rounded transition-colors ${
+                language === "te" ? "bg-solar text-primary" : "text-white/80 hover:text-white"
+              }`}
+              data-testid="button-lang-te"
+            >
+              తెలుగు
+            </button>
+          </div>
         </div>
       </div>
 
@@ -117,6 +105,27 @@ function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <div className="flex items-center gap-2 px-4 py-3 border-t border-white/10 mt-2 pt-3">
+              <Globe className="h-4 w-4 text-white/70" />
+              <button
+                onClick={() => setLanguage("en")}
+                className={`px-3 py-1.5 text-sm font-medium rounded transition-colors ${
+                  language === "en" ? "bg-solar text-primary" : "text-white/80 hover:text-white"
+                }`}
+                data-testid="button-mobile-lang-en"
+              >
+                English
+              </button>
+              <button
+                onClick={() => setLanguage("te")}
+                className={`px-3 py-1.5 text-sm font-medium rounded transition-colors ${
+                  language === "te" ? "bg-solar text-primary" : "text-white/80 hover:text-white"
+                }`}
+                data-testid="button-mobile-lang-te"
+              >
+                తెలుగు
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -196,9 +205,8 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <LanguageBar />
       <Navbar />
-      <main className="flex-1 pt-24">
+      <main className="flex-1 pt-14">
         {children}
       </main>
       <Footer />

@@ -148,121 +148,121 @@ export default function Home() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-solar/20 text-solar px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <Sun className="h-4 w-4" />
-                <span>{t("PM Surya Ghar Yojana Partner", "PM సూర్య ఘర్ యోజన భాగస్వామి")}</span>
-              </div>
-              
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6" data-testid="text-hero-title">
-                {t("Uday Green Economy Mission", "ఉదయ గ్రీన్ ఎకానమీ మిషన్")}
-                <span className="text-solar"> (UdGEM)</span>
-              </h1>
-              
-              <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed" data-testid="text-hero-subtitle">
-                {t("For the People, For the Nation, For Future Generations", "ప్రజల కోసం, దేశం కోసం, భవిష్యత్ తరాల కోసం")}
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link href="/pm-surya-ghar">
-                  <Button 
-                    size="lg" 
-                    className="bg-solar text-primary hover:bg-solar/90 font-semibold px-8"
-                    data-testid="button-check-subsidy"
-                  >
-                    {t("Check Your Subsidy", "మీ సబ్సిడీ తనిఖీ చేయండి")}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link href="/apply">
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-white text-white hover:bg-white/10 font-semibold px-8"
-                    data-testid="button-apply-now"
-                  >
-                    {t("Apply Now", "ఇప్పుడే దరఖాస్తు చేయండి")}
-                  </Button>
-                </Link>
-              </div>
-            </div>
+          <div className="flex gap-6">
+            {/* Main hero content */}
+            <div className="flex-1">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div className="text-center lg:text-left">
+                  <div className="inline-flex items-center gap-2 bg-solar/20 text-solar px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <Sun className="h-4 w-4" />
+                    <span>{t("PM Surya Ghar Yojana Partner", "PM సూర్య ఘర్ యోజన భాగస్వామి")}</span>
+                  </div>
+                  
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6" data-testid="text-hero-title">
+                    {t("Uday Green Economy Mission", "ఉదయ గ్రీన్ ఎకానమీ మిషన్")}
+                    <span className="text-solar"> (UdGEM)</span>
+                  </h1>
+                  
+                  <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed" data-testid="text-hero-subtitle">
+                    {t("For the People, For the Nation, For Future Generations", "ప్రజల కోసం, దేశం కోసం, భవిష్యత్ తరాల కోసం")}
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <Link href="/pm-surya-ghar">
+                      <Button 
+                        size="lg" 
+                        className="bg-solar text-primary hover:bg-solar/90 font-semibold px-8"
+                        data-testid="button-check-subsidy"
+                      >
+                        {t("Check Your Subsidy", "మీ సబ్సిడీ తనిఖీ చేయండి")}
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
+                    <Link href="/apply">
+                      <Button 
+                        size="lg" 
+                        variant="outline" 
+                        className="border-white text-white hover:bg-white/10 font-semibold px-8"
+                        data-testid="button-apply-now"
+                      >
+                        {t("Apply Now", "ఇప్పుడే దరఖాస్తు చేయండి")}
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
 
-            <div className="mt-8 lg:mt-0">
-              <HeroCarousel />
+                <div className="mt-8 lg:mt-0">
+                  <HeroCarousel />
+                </div>
+              </div>
             </div>
+            
+            {/* Ad Banner in hero section */}
+            <AdBanner />
           </div>
         </div>
       </section>
 
-      {/* Main content with ad banner */}
+      {/* Main content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex gap-6">
-          {/* Main content */}
-          <div className="flex-1 min-w-0">
-            <section className="section">
-              <div className="text-center mb-12">
-                <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
-                  {t("Mission One Lakh Houses", "మిషన్ ఒక లక్ష ఇళ్ళు")}
-                </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  {t(
-                    "UdGEM's goal is to enable rooftop solar on 1,00,000 homes with target capacity of 3,00,000 kW, providing 30+ years of clean energy and zero power bills.",
-                    "UdGEM లక్ష్యం 1,00,000 ఇళ్లపై రూఫ్‌టాప్ సోలార్ ఏర్పాటు చేయడం, 3,00,000 kW సామర్థ్యంతో 30+ సంవత్సరాల పరిశుభ్రమైన శక్తిని అందించడం."
-                  )}
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-6">
-                {features.map((feature, index) => (
-                  <Card 
-                    key={index} 
-                    className="border border-border/50 bg-card hover:shadow-lg transition-shadow"
-                    data-testid={`card-feature-${index}`}
-                  >
-                    <CardContent className="p-6">
-                      <div className="h-12 w-12 bg-solar/10 rounded-lg flex items-center justify-center mb-4">
-                        <feature.icon className="h-6 w-6 text-solar" />
-                      </div>
-                      <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </section>
-
-            <section className="section">
-              <div className="text-center mb-12">
-                <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
-                  {t("How It Works", "ఇది ఎలా పనిచేస్తుంది")}
-                </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
-                  {t("Simple steps to get your rooftop solar system installed with government subsidy", "ప్రభుత్వ సబ్సిడీతో మీ రూఫ్‌టాప్ సోలార్ సిస్టమ్ ఇన్‌స్టాల్ చేసుకోవడానికి సులభ దశలు")}
-                </p>
-              </div>
-
-              <div className="relative">
-                <div className="hidden md:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-primary via-solar to-green-500"></div>
-                
-                <div className="grid md:grid-cols-5 gap-6">
-                  {steps.map((item) => (
-                    <div key={item.step} className="relative text-center" data-testid={`step-${item.step}`}>
-                      <div className="relative z-10 w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold shadow-lg">
-                        {item.step}
-                      </div>
-                      <h3 className="font-semibold text-foreground mb-2 text-sm">{item.title}</h3>
-                      <p className="text-xs text-muted-foreground">{item.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
+        <section className="section">
+          <div className="text-center mb-12">
+            <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
+              {t("Mission One Lakh Houses", "మిషన్ ఒక లక్ష ఇళ్ళు")}
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              {t(
+                "UdGEM's goal is to enable rooftop solar on 1,00,000 homes with target capacity of 3,00,000 kW, providing 30+ years of clean energy and zero power bills.",
+                "UdGEM లక్ష్యం 1,00,000 ఇళ్లపై రూఫ్‌టాప్ సోలార్ ఏర్పాటు చేయడం, 3,00,000 kW సామర్థ్యంతో 30+ సంవత్సరాల పరిశుభ్రమైన శక్తిని అందించడం."
+              )}
+            </p>
           </div>
 
-          {/* Ad Banner on the right */}
-          <AdBanner />
-        </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {features.map((feature, index) => (
+              <Card 
+                key={index} 
+                className="border border-border/50 bg-card hover:shadow-lg transition-shadow"
+                data-testid={`card-feature-${index}`}
+              >
+                <CardContent className="p-6">
+                  <div className="h-12 w-12 bg-solar/10 rounded-lg flex items-center justify-center mb-4">
+                    <feature.icon className="h-6 w-6 text-solar" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="text-center mb-12">
+            <h2 className="section-title text-2xl md:text-3xl font-bold text-foreground">
+              {t("How It Works", "ఇది ఎలా పనిచేస్తుంది")}
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              {t("Simple steps to get your rooftop solar system installed with government subsidy", "ప్రభుత్వ సబ్సిడీతో మీ రూఫ్‌టాప్ సోలార్ సిస్టమ్ ఇన్‌స్టాల్ చేసుకోవడానికి సులభ దశలు")}
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="hidden md:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-primary via-solar to-green-500"></div>
+            
+            <div className="grid md:grid-cols-5 gap-6">
+              {steps.map((item) => (
+                <div key={item.step} className="relative text-center" data-testid={`step-${item.step}`}>
+                  <div className="relative z-10 w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold shadow-lg">
+                    {item.step}
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2 text-sm">{item.title}</h3>
+                  <p className="text-xs text-muted-foreground">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
 
       <section className="section bg-primary text-white">

@@ -212,10 +212,11 @@ export default function ChatBot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 bg-solar text-primary p-4 rounded-full shadow-lg hover:bg-solar/90 transition-colors"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-solar text-primary pl-4 pr-5 py-3 rounded-full shadow-lg hover:bg-solar/90 transition-colors"
           data-testid="button-chat-open"
         >
           <MessageCircle className="h-6 w-6" />
+          <span className="font-semibold text-sm">{t("Talk to us", "మాతో మాట్లాడండి")}</span>
         </button>
       )}
 

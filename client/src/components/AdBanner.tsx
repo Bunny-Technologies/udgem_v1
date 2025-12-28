@@ -113,8 +113,8 @@ export default function AdBanner() {
   };
 
   return (
-    <div className="hidden lg:block w-64 flex-shrink-0 space-y-4 sticky top-28" data-testid="ad-banner-container">
-      <p className="text-xs text-muted-foreground text-center uppercase tracking-wide">
+    <div className="hidden lg:block w-64 flex-shrink-0 space-y-3 max-h-[500px] overflow-y-auto" data-testid="ad-banner-container">
+      <p className="text-xs text-white/70 text-center uppercase tracking-wide">
         {t("Sponsored", "ప్రకటనలు")}
       </p>
       
@@ -154,11 +154,11 @@ export default function AdBanner() {
       ))}
       
       {/* Ad space notice */}
-      <div className="border-2 border-dashed border-muted-foreground/30 rounded-lg p-4 text-center">
-        <p className="text-xs text-muted-foreground">
+      <div className="border-2 border-dashed border-white/30 rounded-lg p-3 text-center">
+        <p className="text-xs text-white/70">
           {t("Advertise Here", "ఇక్కడ ప్రకటన ఇవ్వండి")}
         </p>
-        <p className="text-xs text-muted-foreground mt-1">
+        <p className="text-xs text-white/70 mt-1">
           info@udgem.in
         </p>
       </div>

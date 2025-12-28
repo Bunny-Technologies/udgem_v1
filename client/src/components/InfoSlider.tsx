@@ -97,61 +97,59 @@ export default function InfoSlider() {
 
   return (
     <div className="flex flex-col" data-testid="info-slider-container">
-      <p className="text-xs text-white/60 text-center uppercase tracking-wide mb-1">
+      <p className="text-xs text-white/60 text-center uppercase tracking-wide mb-2">
         {language === "en" ? "Solar Facts" : "సోలార్ వాస్తవాలు"}
       </p>
       
-      <div className="relative">
-        <button
-          onClick={prevSlide}
-          className="absolute -top-1 left-1/2 -translate-x-1/2 z-20 bg-white/10 hover:bg-white/20 text-white p-1 rounded-full transition-colors"
-          data-testid="button-info-prev"
-        >
-          <ChevronUp className="h-4 w-4" />
-        </button>
-
-        <div className="py-5">
-          <div
-            className={`w-full bg-gradient-to-br ${currentCard.bgColor} rounded-lg p-3 text-white shadow-lg transition-all duration-300`}
-            data-testid={`info-card-${currentSlide}`}
-          >
-            <div className="flex items-center gap-2 mb-1">
-              <Icon className="h-4 w-4" />
-              <span className="font-semibold text-xs">
-                {language === "en" ? currentCard.title.en : currentCard.title.te}
-              </span>
-            </div>
-            
-            <p className="text-lg font-bold mb-1">
-              {language === "en" ? currentCard.stat.en : currentCard.stat.te}
-            </p>
-            
-            <p className="text-xs text-white/90">
-              {language === "en" ? currentCard.description.en : currentCard.description.te}
-            </p>
-          </div>
+      <div
+        className={`w-full bg-gradient-to-br ${currentCard.bgColor} rounded-xl p-4 text-white shadow-lg transition-all duration-300`}
+        data-testid={`info-card-${currentSlide}`}
+      >
+        <div className="flex items-center gap-2 mb-2">
+          <Icon className="h-5 w-5" />
+          <span className="font-semibold text-sm">
+            {language === "en" ? currentCard.title.en : currentCard.title.te}
+          </span>
         </div>
+        
+        <p className="text-2xl font-bold mb-2">
+          {language === "en" ? currentCard.stat.en : currentCard.stat.te}
+        </p>
+        
+        <p className="text-sm text-white/90 mb-3">
+          {language === "en" ? currentCard.description.en : currentCard.description.te}
+        </p>
 
-        <button
-          onClick={nextSlide}
-          className="absolute -bottom-1 left-1/2 -translate-x-1/2 z-20 bg-white/10 hover:bg-white/20 text-white p-1 rounded-full transition-colors"
-          data-testid="button-info-next"
-        >
-          <ChevronDown className="h-4 w-4" />
-        </button>
-      </div>
-
-      <div className="flex justify-center gap-1 mt-1">
-        {infoCards.map((_, index) => (
+        <div className="flex items-center justify-between">
           <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-1.5 h-1.5 rounded-full transition-colors ${
-              index === currentSlide ? "bg-solar" : "bg-white/30 hover:bg-white/50"
-            }`}
-            data-testid={`button-info-dot-${index}`}
-          />
-        ))}
+            onClick={prevSlide}
+            className="bg-white/20 hover:bg-white/30 text-white p-1.5 rounded-full transition-colors"
+            data-testid="button-info-prev"
+          >
+            <ChevronUp className="h-4 w-4" />
+          </button>
+          
+          <div className="flex gap-1.5">
+            {infoCards.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-2 h-2 rounded-full transition-colors ${
+                  index === currentSlide ? "bg-white" : "bg-white/40 hover:bg-white/60"
+                }`}
+                data-testid={`button-info-dot-${index}`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={nextSlide}
+            className="bg-white/20 hover:bg-white/30 text-white p-1.5 rounded-full transition-colors"
+            data-testid="button-info-next"
+          >
+            <ChevronDown className="h-4 w-4" />
+          </button>
+        </div>
       </div>
     </div>
   );

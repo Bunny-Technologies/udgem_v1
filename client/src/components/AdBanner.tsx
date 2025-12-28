@@ -118,69 +118,67 @@ export default function AdBanner() {
 
   return (
     <div className="w-full" data-testid="ad-banner-container">
-      <p className="text-xs text-white/60 text-center uppercase tracking-wide mb-1">
+      <p className="text-xs text-white/60 text-center uppercase tracking-wide mb-2">
         {t("Sponsored", "ప్రకటనలు")}
       </p>
       
-      <div className="relative">
-        <button
-          onClick={prevSlide}
-          className="absolute -top-1 left-1/2 -translate-x-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-1 rounded-full transition-colors"
-          data-testid="button-ad-prev"
-        >
-          <ChevronUp className="h-4 w-4" />
-        </button>
-
-        <div className="pt-4 pb-4">
-          <div
-            className={`bg-gradient-to-br ${currentAd.bgColor} rounded-lg p-3 text-white shadow-lg transition-all duration-300`}
-            data-testid={`ad-card-${currentSlide}`}
-          >
-            <div className="flex items-center gap-2 mb-1">
-              <Sun className="h-4 w-4" />
-              <span className="font-bold text-xs">{currentAd.company}</span>
-            </div>
-            
-            <p className="text-xs text-white/90 mb-2">
-              {language === "en" ? currentAd.tagline.en : currentAd.tagline.te}
-            </p>
-            
-            <div className={`${currentAd.accentColor} rounded px-2 py-0.5 text-xs font-semibold mb-2 inline-flex items-center gap-1`}>
-              <Zap className="h-3 w-3" />
-              {language === "en" ? currentAd.offer.en : currentAd.offer.te}
-            </div>
-            
-            <button 
-              onClick={() => handleLearnMore(currentAd)}
-              className="w-full bg-white/20 hover:bg-white/30 transition-colors text-white text-xs font-medium py-1.5 px-2 rounded flex items-center justify-center gap-1"
-              data-testid={`button-learn-more-${currentAd.id}`}
-            >
-              {t("Learn More", "మరింత తెలుసుకోండి")}
-              <ArrowRight className="h-3 w-3" />
-            </button>
-          </div>
+      <div
+        className={`bg-gradient-to-br ${currentAd.bgColor} rounded-xl p-4 text-white shadow-lg transition-all duration-300`}
+        data-testid={`ad-card-${currentSlide}`}
+      >
+        <div className="flex items-center gap-2 mb-2">
+          <Sun className="h-5 w-5" />
+          <span className="font-bold text-sm">{currentAd.company}</span>
         </div>
-
-        <button
-          onClick={nextSlide}
-          className="absolute -bottom-1 left-1/2 -translate-x-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-1 rounded-full transition-colors"
-          data-testid="button-ad-next"
+        
+        <p className="text-sm text-white/90 mb-2">
+          {language === "en" ? currentAd.tagline.en : currentAd.tagline.te}
+        </p>
+        
+        <div className={`${currentAd.accentColor} rounded px-3 py-1 text-sm font-semibold mb-3 inline-flex items-center gap-1`}>
+          <Zap className="h-4 w-4" />
+          {language === "en" ? currentAd.offer.en : currentAd.offer.te}
+        </div>
+        
+        <button 
+          onClick={() => handleLearnMore(currentAd)}
+          className="w-full bg-white/20 hover:bg-white/30 transition-colors text-white text-sm font-medium py-2 px-3 rounded flex items-center justify-center gap-1 mb-3"
+          data-testid={`button-learn-more-${currentAd.id}`}
         >
-          <ChevronDown className="h-4 w-4" />
+          {t("Learn More", "మరింత తెలుసుకోండి")}
+          <ArrowRight className="h-4 w-4" />
         </button>
-      </div>
 
-      <div className="flex justify-center gap-1.5 mt-2">
-        {ads.map((_, index) => (
+        <div className="flex items-center justify-between">
           <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              index === currentSlide ? "bg-solar" : "bg-white/40 hover:bg-white/60"
-            }`}
-            data-testid={`button-ad-dot-${index}`}
-          />
-        ))}
+            onClick={prevSlide}
+            className="bg-white/20 hover:bg-white/30 text-white p-1.5 rounded-full transition-colors"
+            data-testid="button-ad-prev"
+          >
+            <ChevronUp className="h-4 w-4" />
+          </button>
+          
+          <div className="flex gap-1.5">
+            {ads.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-2 h-2 rounded-full transition-colors ${
+                  index === currentSlide ? "bg-white" : "bg-white/40 hover:bg-white/60"
+                }`}
+                data-testid={`button-ad-dot-${index}`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={nextSlide}
+            className="bg-white/20 hover:bg-white/30 text-white p-1.5 rounded-full transition-colors"
+            data-testid="button-ad-next"
+          >
+            <ChevronDown className="h-4 w-4" />
+          </button>
+        </div>
       </div>
     </div>
   );

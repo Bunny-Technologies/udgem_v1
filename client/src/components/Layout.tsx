@@ -132,9 +132,10 @@ function Navbar({ language }: { language: Language }) {
   );
 }
 
-const navLinks = navLinksData.en;
+function Footer({ language }: { language: Language }) {
+  const t = (en: string, te: string) => language === "en" ? en : te;
+  const navLinks = navLinksData[language];
 
-function Footer() {
   return (
     <footer className="bg-primary text-white" data-testid="footer">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -145,19 +146,22 @@ function Footer() {
               <span className="text-xl font-semibold">UdGEM</span>
             </div>
             <p className="text-white/80 text-sm leading-relaxed">
-              Uday Green Economy Mission - Working towards a sustainable future through solar energy adoption and green initiatives.
+              {t(
+                "Uday Green Economy Mission - Working towards a sustainable future through solar energy adoption and green initiatives.",
+                "ఉదయ గ్రీన్ ఎకానమీ మిషన్ - సోలార్ ఎనర్జీ స్వీకరణ మరియు హరిత చొరవల ద్వారా సుస్థిర భవిష్యత్తు వైపు పనిచేస్తోంది."
+              )}
             </p>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("Quick Links", "త్వరిత లింకులు")}</h3>
             <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     className="text-white/80 hover:text-solar text-sm transition-colors"
-                    data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                    data-testid={`link-footer-${link.href.replace(/\//g, '') || 'home'}`}
                   >
                     {link.label}
                   </Link>
@@ -167,7 +171,7 @@ function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("Contact Us", "మమ్మల్ని సంప్రదించండి")}</h3>
             <ul className="space-y-3">
               <li className="flex items-center gap-3 text-sm text-white/80">
                 <Phone className="h-4 w-4 text-solar flex-shrink-0" />
@@ -179,14 +183,14 @@ function Footer() {
               </li>
               <li className="flex items-start gap-3 text-sm text-white/80">
                 <MapPin className="h-4 w-4 text-solar flex-shrink-0 mt-0.5" />
-                <span>Andhra Pradesh & Telangana, India</span>
+                <span>{t("Andhra Pradesh & Telangana, India", "ఆంధ్రప్రదేశ్ & తెలంగాణ, భారతదేశం")}</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-white/20 mt-8 pt-8 text-center text-sm text-white/60">
-          <p>© UdGEM – Uday Green Economy Mission | info@udgem.in | +91 93999 99047 | +91 73372 63156</p>
+          <p>© UdGEM – {t("Uday Green Economy Mission", "ఉదయ గ్రీన్ ఎకానమీ మిషన్")} | info@udgem.in | +91 93999 99047 | +91 73372 63156</p>
         </div>
       </div>
     </footer>
@@ -210,7 +214,7 @@ export default function Layout({ children }: LayoutProps) {
         <main className="flex-1 pt-24">
           {children}
         </main>
-        <Footer />
+        <Footer language={language} />
       </div>
     </LanguageContext.Provider>
   );

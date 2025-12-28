@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -8,13 +7,12 @@ import { FileText, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import Layout from "@/components/Layout";
+import Layout, { useLanguage } from "@/components/Layout";
 
 const applicationSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -38,6 +36,7 @@ type ApplicationForm = z.infer<typeof applicationSchema>;
 export default function Apply() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const form = useForm<ApplicationForm>({
     resolver: zodResolver(applicationSchema),
@@ -69,8 +68,8 @@ export default function Apply() {
     onError: (error: any) => {
       toast({
         variant: "destructive",
-        title: "Submission Failed",
-        description: error.message || "Please try again later",
+        title: t("Submission Failed", "సమర్పణ విఫలమైంది"),
+        description: error.message || t("Please try again later", "దయచేసి తర్వాత మళ్ళీ ప్రయత్నించండి"),
       });
     },
   });
@@ -84,10 +83,10 @@ export default function Apply() {
       <section className="bg-gradient-to-br from-primary to-primary/90 text-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-4" data-testid="text-apply-title">
-            Apply for PM Surya Ghar
+            {t("Apply for PM Surya Ghar", "PM సూర్య ఘర్ కోసం దరఖాస్తు చేయండి")}
           </h1>
           <p className="text-lg text-white/90 max-w-3xl mx-auto">
-            Register your interest and get guidance from our team
+            {t("Register your interest and get guidance from our team", "మీ ఆసక్తిని నమోదు చేసి మా బృందం నుండి మార్గదర్శకత్వం పొందండి")}
           </p>
         </div>
       </section>
@@ -98,11 +97,12 @@ export default function Apply() {
             <div className="flex items-start gap-3">
               <Info className="h-5 w-5 text-solar flex-shrink-0 mt-0.5" />
               <div className="text-sm">
-                <p className="font-medium text-foreground mb-1">Important Note</p>
+                <p className="font-medium text-foreground mb-1">{t("Important Note", "ముఖ్యమైన గమనిక")}</p>
                 <p className="text-muted-foreground">
-                  This form is for interest registration and guidance only. The formal subsidy application 
-                  happens on the official government portal (pmsuryaghar.gov.in). UdGEM helps with awareness, 
-                  documentation, and vendor linking.
+                  {t(
+                    "This form is for interest registration and guidance only. The formal subsidy application happens on the official government portal (pmsuryaghar.gov.in). UdGEM helps with awareness, documentation, and vendor linking.",
+                    "ఈ ఫారమ్ ఆసక్తి నమోదు మరియు మార్గదర్శకత్వం కోసం మాత్రమే. అధికారిక సబ్సిడీ దరఖాస్తు ప్రభుత్వ పోర్టల్ (pmsuryaghar.gov.in) లో జరుగుతుంది. UdGEM అవగాహన, డాక్యుమెంటేషన్ మరియు వెండార్ లింకింగ్‌లో సహాయపడుతుంది."
+                  )}
                 </p>
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function Apply() {
             <CardHeader className="bg-primary/5 border-b border-border">
               <CardTitle className="flex items-center gap-3">
                 <FileText className="h-6 w-6 text-primary" />
-                <span>Application Form</span>
+                <span>{t("Application Form", "దరఖాస్తు ఫారమ్")}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="p-6">
@@ -124,9 +124,9 @@ export default function Apply() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Full Name *</FormLabel>
+                          <FormLabel>{t("Full Name *", "పూర్తి పేరు *")}</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter your full name" {...field} data-testid="input-name" />
+                            <Input placeholder={t("Enter your full name", "మీ పూర్తి పేరు నమోదు చేయండి")} {...field} data-testid="input-name" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -138,9 +138,9 @@ export default function Apply() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Mobile Number *</FormLabel>
+                          <FormLabel>{t("Mobile Number *", "మొబైల్ నంబర్ *")}</FormLabel>
                           <FormControl>
-                            <Input placeholder="10-digit mobile number" {...field} data-testid="input-phone" />
+                            <Input placeholder={t("10-digit mobile number", "10 అంకెల మొబైల్ నంబర్")} {...field} data-testid="input-phone" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -152,7 +152,7 @@ export default function Apply() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email Address *</FormLabel>
+                          <FormLabel>{t("Email Address *", "ఇమెయిల్ చిరునామా *")}</FormLabel>
                           <FormControl>
                             <Input type="email" placeholder="your@email.com" {...field} data-testid="input-email" />
                           </FormControl>
@@ -166,17 +166,17 @@ export default function Apply() {
                       name="state"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>State *</FormLabel>
+                          <FormLabel>{t("State *", "రాష్ట్రం *")}</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger data-testid="select-state">
-                                <SelectValue placeholder="Select state" />
+                                <SelectValue placeholder={t("Select state", "రాష్ట్రాన్ని ఎంచుకోండి")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="andhra-pradesh">Andhra Pradesh</SelectItem>
-                              <SelectItem value="telangana">Telangana</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
+                              <SelectItem value="andhra-pradesh">{t("Andhra Pradesh", "ఆంధ్రప్రదేశ్")}</SelectItem>
+                              <SelectItem value="telangana">{t("Telangana", "తెలంగాణ")}</SelectItem>
+                              <SelectItem value="other">{t("Other", "ఇతర")}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -189,9 +189,9 @@ export default function Apply() {
                       name="district"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>District / City *</FormLabel>
+                          <FormLabel>{t("District / City *", "జిల్లా / నగరం *")}</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter your district or city" {...field} data-testid="input-district" />
+                            <Input placeholder={t("Enter your district or city", "మీ జిల్లా లేదా నగరాన్ని నమోదు చేయండి")} {...field} data-testid="input-district" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -203,17 +203,17 @@ export default function Apply() {
                       name="householdType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Household Type *</FormLabel>
+                          <FormLabel>{t("Household Type *", "గృహ రకం *")}</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger data-testid="select-household">
-                                <SelectValue placeholder="Select type" />
+                                <SelectValue placeholder={t("Select type", "రకాన్ని ఎంచుకోండి")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="independent">Independent House</SelectItem>
-                              <SelectItem value="apartment">Apartment</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
+                              <SelectItem value="independent">{t("Independent House", "స్వతంత్ర ఇల్లు")}</SelectItem>
+                              <SelectItem value="apartment">{t("Apartment", "అపార్ట్‌మెంట్")}</SelectItem>
+                              <SelectItem value="other">{t("Other", "ఇతర")}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -226,16 +226,16 @@ export default function Apply() {
                       name="ownership"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Ownership Status *</FormLabel>
+                          <FormLabel>{t("Ownership Status *", "యాజమాన్య స్థితి *")}</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger data-testid="select-ownership">
-                                <SelectValue placeholder="Select status" />
+                                <SelectValue placeholder={t("Select status", "స్థితిని ఎంచుకోండి")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="owner">Owner</SelectItem>
-                              <SelectItem value="tenant">Tenant</SelectItem>
+                              <SelectItem value="owner">{t("Owner", "యజమాని")}</SelectItem>
+                              <SelectItem value="tenant">{t("Tenant", "అద్దెదారు")}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -248,9 +248,9 @@ export default function Apply() {
                       name="monthlyUnits"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Monthly Consumption (Units) *</FormLabel>
+                          <FormLabel>{t("Monthly Consumption (Units) *", "నెలవారీ వినియోగం (యూనిట్లు) *")}</FormLabel>
                           <FormControl>
-                            <Input type="number" placeholder="e.g., 200" {...field} data-testid="input-units" />
+                            <Input type="number" placeholder={t("e.g., 200", "ఉదా., 200")} {...field} data-testid="input-units" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -262,9 +262,9 @@ export default function Apply() {
                       name="proposedKw"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Proposed Capacity (kW) *</FormLabel>
+                          <FormLabel>{t("Proposed Capacity (kW) *", "ప్రతిపాదిత సామర్థ్యం (kW) *")}</FormLabel>
                           <FormControl>
-                            <Input type="number" step="0.5" placeholder="e.g., 3" {...field} data-testid="input-kw" />
+                            <Input type="number" step="0.5" placeholder={t("e.g., 3", "ఉదా., 3")} {...field} data-testid="input-kw" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -276,9 +276,9 @@ export default function Apply() {
                       name="discomNumber"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>DISCOM / Consumer Number</FormLabel>
+                          <FormLabel>{t("DISCOM / Consumer Number", "DISCOM / వినియోగదారు సంఖ్య")}</FormLabel>
                           <FormControl>
-                            <Input placeholder="Optional" {...field} data-testid="input-discom" />
+                            <Input placeholder={t("Optional", "ఐచ్ఛికం")} {...field} data-testid="input-discom" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -290,19 +290,19 @@ export default function Apply() {
                       name="category"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Category *</FormLabel>
+                          <FormLabel>{t("Category *", "వర్గం *")}</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger data-testid="select-category">
-                                <SelectValue placeholder="Select category" />
+                                <SelectValue placeholder={t("Select category", "వర్గాన్ని ఎంచుకోండి")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="general">General</SelectItem>
+                              <SelectItem value="general">{t("General", "జనరల్")}</SelectItem>
                               <SelectItem value="obc">OBC</SelectItem>
                               <SelectItem value="sc">SC</SelectItem>
                               <SelectItem value="st">ST</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
+                              <SelectItem value="other">{t("Other", "ఇతర")}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -315,19 +315,19 @@ export default function Apply() {
                       name="referralSource"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>How did you hear about us? *</FormLabel>
+                          <FormLabel>{t("How did you hear about us? *", "మా గురించి మీకు ఎలా తెలిసింది? *")}</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger data-testid="select-referral">
-                                <SelectValue placeholder="Select source" />
+                                <SelectValue placeholder={t("Select source", "సోర్స్ ఎంచుకోండి")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="friend">Friend / Family</SelectItem>
-                              <SelectItem value="social-media">Social Media</SelectItem>
+                              <SelectItem value="friend">{t("Friend / Family", "స్నేహితుడు / కుటుంబం")}</SelectItem>
+                              <SelectItem value="social-media">{t("Social Media", "సోషల్ మీడియా")}</SelectItem>
                               <SelectItem value="ngo">NGO</SelectItem>
-                              <SelectItem value="newspaper">Newspaper</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
+                              <SelectItem value="newspaper">{t("Newspaper", "వార్తాపత్రిక")}</SelectItem>
+                              <SelectItem value="other">{t("Other", "ఇతర")}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -341,10 +341,10 @@ export default function Apply() {
                     name="address"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Full Address *</FormLabel>
+                        <FormLabel>{t("Full Address *", "పూర్తి చిరునామా *")}</FormLabel>
                         <FormControl>
                           <Textarea 
-                            placeholder="Enter your complete address with pincode" 
+                            placeholder={t("Enter your complete address with pincode", "పిన్‌కోడ్‌తో సహా మీ పూర్తి చిరునామాను నమోదు చేయండి")} 
                             className="resize-none" 
                             rows={3}
                             {...field} 
@@ -361,10 +361,10 @@ export default function Apply() {
                     name="notes"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Questions or Notes</FormLabel>
+                        <FormLabel>{t("Questions or Notes", "ప్రశ్నలు లేదా గమనికలు")}</FormLabel>
                         <FormControl>
                           <Textarea 
-                            placeholder="Any questions or additional information" 
+                            placeholder={t("Any questions or additional information", "ఏవైనా ప్రశ్నలు లేదా అదనపు సమాచారం")} 
                             className="resize-none" 
                             rows={3}
                             {...field} 
@@ -383,7 +383,7 @@ export default function Apply() {
                     disabled={mutation.isPending}
                     data-testid="button-submit"
                   >
-                    {mutation.isPending ? "Submitting..." : "Submit Application"}
+                    {mutation.isPending ? t("Submitting...", "సమర్పిస్తోంది...") : t("Submit Application", "దరఖాస్తు సమర్పించండి")}
                   </Button>
                 </form>
               </Form>

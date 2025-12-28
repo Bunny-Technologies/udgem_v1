@@ -1,12 +1,6 @@
-import { Sun, Zap, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Sun, Zap, ArrowRight, ChevronUp, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-
-/**
- * AdBanner Component
- * 
- * Displays vertical advertisement banners for solar companies.
- * These are placeholder ads - replace with actual advertiser content when available.
- */
 
 interface Ad {
   id: string;
@@ -18,7 +12,6 @@ interface Ad {
   accentColor: string;
 }
 
-// Placeholder solar company ads - Replace with actual advertisers
 const ads: Ad[] = [
   {
     id: "sunpower",
@@ -94,15 +87,24 @@ const ads: Ad[] = [
   }
 ];
 
-// Export ads for use in ChatBot
 export { ads };
 export type { Ad };
 
 export default function AdBanner() {
   const { language, t } = useLanguage();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % ads.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + ads.length) % ads.length);
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % ads.length);
 
   const handleLearnMore = (ad: Ad) => {
-    // Dispatch custom event to open chatbot with product info
     const event = new CustomEvent('openChatWithProduct', { 
       detail: { 
         company: ad.company,
@@ -112,55 +114,73 @@ export default function AdBanner() {
     window.dispatchEvent(event);
   };
 
+  const currentAd = ads[currentSlide];
+
   return (
-    <div className="hidden lg:block w-64 flex-shrink-0 space-y-3 max-h-[500px] overflow-y-auto" data-testid="ad-banner-container">
-      <p className="text-xs text-white/70 text-center uppercase tracking-wide">
+    <div className="hidden lg:block w-56 flex-shrink-0" data-testid="ad-banner-container">
+      <p className="text-xs text-white/70 text-center uppercase tracking-wide mb-2">
         {t("Sponsored", "ప్రకటనలు")}
       </p>
       
-      {ads.map((ad, index) => (
-        <div
-          key={ad.id}
-          className={`bg-gradient-to-br ${ad.bgColor} rounded-lg p-4 text-white shadow-lg`}
-          data-testid={`ad-card-${index}`}
+      <div className="relative">
+        <button
+          onClick={prevSlide}
+          className="absolute -top-1 left-1/2 -translate-x-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-1 rounded-full transition-colors"
+          data-testid="button-ad-prev"
         >
-          {/* Company name */}
-          <div className="flex items-center gap-2 mb-2">
-            <Sun className="h-5 w-5" />
-            <span className="font-bold text-sm">{ad.company}</span>
-          </div>
-          
-          {/* Tagline */}
-          <p className="text-xs text-white/90 mb-3">
-            {language === "en" ? ad.tagline.en : ad.tagline.te}
-          </p>
-          
-          {/* Offer badge */}
-          <div className={`${ad.accentColor} rounded px-2 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1`}>
-            <Zap className="h-3 w-3" />
-            {language === "en" ? ad.offer.en : ad.offer.te}
-          </div>
-          
-          {/* CTA */}
-          <button 
-            onClick={() => handleLearnMore(ad)}
-            className="mt-2 w-full bg-white/20 hover:bg-white/30 transition-colors text-white text-xs font-medium py-2 px-3 rounded flex items-center justify-center gap-1"
-            data-testid={`button-learn-more-${ad.id}`}
+          <ChevronUp className="h-4 w-4" />
+        </button>
+
+        <div className="pt-6 pb-6">
+          <div
+            className={`bg-gradient-to-br ${currentAd.bgColor} rounded-lg p-4 text-white shadow-lg transition-all duration-300`}
+            data-testid={`ad-card-${currentSlide}`}
           >
-            {t("Learn More", "మరింత తెలుసుకోండి")}
-            <ArrowRight className="h-3 w-3" />
-          </button>
+            <div className="flex items-center gap-2 mb-2">
+              <Sun className="h-5 w-5" />
+              <span className="font-bold text-sm">{currentAd.company}</span>
+            </div>
+            
+            <p className="text-xs text-white/90 mb-3">
+              {language === "en" ? currentAd.tagline.en : currentAd.tagline.te}
+            </p>
+            
+            <div className={`${currentAd.accentColor} rounded px-2 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1`}>
+              <Zap className="h-3 w-3" />
+              {language === "en" ? currentAd.offer.en : currentAd.offer.te}
+            </div>
+            
+            <button 
+              onClick={() => handleLearnMore(currentAd)}
+              className="mt-2 w-full bg-white/20 hover:bg-white/30 transition-colors text-white text-xs font-medium py-2 px-3 rounded flex items-center justify-center gap-1"
+              data-testid={`button-learn-more-${currentAd.id}`}
+            >
+              {t("Learn More", "మరింత తెలుసుకోండి")}
+              <ArrowRight className="h-3 w-3" />
+            </button>
+          </div>
         </div>
-      ))}
-      
-      {/* Ad space notice */}
-      <div className="border-2 border-dashed border-white/30 rounded-lg p-3 text-center">
-        <p className="text-xs text-white/70">
-          {t("Advertise Here", "ఇక్కడ ప్రకటన ఇవ్వండి")}
-        </p>
-        <p className="text-xs text-white/70 mt-1">
-          info@udgem.in
-        </p>
+
+        <button
+          onClick={nextSlide}
+          className="absolute -bottom-1 left-1/2 -translate-x-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-1 rounded-full transition-colors"
+          data-testid="button-ad-next"
+        >
+          <ChevronDown className="h-4 w-4" />
+        </button>
+      </div>
+
+      <div className="flex justify-center gap-1.5 mt-2">
+        {ads.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-2 h-2 rounded-full transition-colors ${
+              index === currentSlide ? "bg-solar" : "bg-white/40 hover:bg-white/60"
+            }`}
+            data-testid={`button-ad-dot-${index}`}
+          />
+        ))}
       </div>
     </div>
   );

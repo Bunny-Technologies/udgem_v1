@@ -6,24 +6,20 @@ import Layout from "@/components/Layout";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
 
-import ruralIndia1 from "@assets/stock_images/rural_india_village__2af0c0b4.jpg";
-import ruralIndia2 from "@assets/stock_images/rural_india_village__7eb6e4ab.jpg";
-import ruralIndia3 from "@assets/stock_images/rural_india_village__e63a85b8.jpg";
-import southIndia1 from "@assets/stock_images/south_india_village__5092e093.jpg";
-import southIndia2 from "@assets/stock_images/south_india_village__7ff696d4.jpg";
-import southIndia3 from "@assets/stock_images/south_india_village__979eb0b5.jpg";
-import villageWomen1 from "@assets/stock_images/indian_rural_village_b90ff5ad.jpg";
-import villageWomen2 from "@assets/stock_images/indian_rural_village_82e53dd6.jpg";
+import teluguVillageHome from "@assets/generated_images/telugu_village_home_with_solar.png";
+import indianWomanSolar from "@assets/generated_images/indian_woman_with_solar_power.png";
+import villageAerialView from "@assets/generated_images/indian_village_solar_aerial_view.png";
+import solarInstallWorker from "@assets/generated_images/indian_solar_installation_worker.png";
+import indianFamilySolar from "@assets/generated_images/indian_family_with_solar_home.png";
+import farmerSolarMeter from "@assets/generated_images/indian_farmer_checking_solar_meter.png";
 
 const carouselImages = [
-  { src: ruralIndia1, alt: "భారత గ్రామంలో సోలార్ ప్యానెల్స్" },
-  { src: southIndia1, alt: "దక్షిణ భారత గృహంలో సౌర విద్యుత్" },
-  { src: villageWomen1, alt: "గ్రామీణ భారతంలో మహిళలు మరియు సోలార్ శక్తి" },
-  { src: ruralIndia2, alt: "భారత గ్రామీణ గృహంలో టెర్రస్ సోలార్" },
-  { src: southIndia2, alt: "తెలుగు రాష్ట్రాల్లో సోలార్ విద్యుత్" },
-  { src: villageWomen2, alt: "గ్రామీణ స్వచ్ఛ ఇంధనం" },
-  { src: ruralIndia3, alt: "భారత గ్రామంలో పునరుత్పాదక శక్తి" },
-  { src: southIndia3, alt: "ఆంధ్రప్రదేశ్ తెలంగాణ సోలార్ గృహాలు" },
+  { src: teluguVillageHome, alt: "తెలుగు గ్రామ ఇంటిపై సోలార్ ప్యానెల్స్" },
+  { src: indianFamilySolar, alt: "సోలార్ గృహంతో భారతీయ కుటుంబం" },
+  { src: villageAerialView, alt: "గ్రామంలో సోలార్ పై నుండి చూపు" },
+  { src: indianWomanSolar, alt: "సోలార్ విద్యుత్ తో భారతీయ మహిళ" },
+  { src: solarInstallWorker, alt: "సోలార్ ప్యానెల్ ఇన్‌స్టాలేషన్" },
+  { src: farmerSolarMeter, alt: "రైతు సోలార్ మీటర్ చూస్తున్నారు" },
 ];
 
 function HeroCarousel() {

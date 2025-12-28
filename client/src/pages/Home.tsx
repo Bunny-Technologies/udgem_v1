@@ -17,15 +17,46 @@ import indianFamilySolar from "@assets/generated_images/indian_family_with_solar
 import farmerSolarMeter from "@assets/generated_images/indian_farmer_checking_solar_meter.png";
 
 const carouselImages = [
-  { src: teluguVillageHome, alt: "తెలుగు గ్రామ ఇంటిపై సోలార్ ప్యానెల్స్" },
-  { src: indianFamilySolar, alt: "సోలార్ గృహంతో భారతీయ కుటుంబం" },
-  { src: villageAerialView, alt: "గ్రామంలో సోలార్ పై నుండి చూపు" },
-  { src: indianWomanSolar, alt: "సోలార్ విద్యుత్ తో భారతీయ మహిళ" },
-  { src: solarInstallWorker, alt: "సోలార్ ప్యానెల్ ఇన్‌స్టాలేషన్" },
-  { src: farmerSolarMeter, alt: "రైతు సోలార్ మీటర్ చూస్తున్నారు" },
+  { 
+    src: teluguVillageHome, 
+    alt: "తెలుగు గ్రామ ఇంటిపై సోలార్ ప్యానెల్స్",
+    benefit: { en: "Zero Electricity Bills", te: "సున్నా విద్యుత్ బిల్లులు" },
+    subtext: { en: "Save Rs. 2,000+ every month", te: "ప్రతి నెల Rs. 2,000+ ఆదా" }
+  },
+  { 
+    src: indianFamilySolar, 
+    alt: "సోలార్ గృహంతో భారతీయ కుటుంబం",
+    benefit: { en: "Power Independence", te: "విద్యుత్ స్వాతంత్ర్యం" },
+    subtext: { en: "No more power cuts!", te: "ఇక పవర్ కట్ లేదు!" }
+  },
+  { 
+    src: villageAerialView, 
+    alt: "గ్రామంలో సోలార్ పై నుండి చూపు",
+    benefit: { en: "Green Villages", te: "పచ్చని గ్రామాలు" },
+    subtext: { en: "Building a sustainable future", te: "సుస్థిర భవిష్యత్తు నిర్మాణం" }
+  },
+  { 
+    src: indianWomanSolar, 
+    alt: "సోలార్ విద్యుత్ తో భారతీయ మహిళ",
+    benefit: { en: "25 Years Free Power", te: "25 సంవత్సరాలు ఉచిత విద్యుత్" },
+    subtext: { en: "One-time investment, lifetime returns", te: "ఒకసారి పెట్టుబడి, జీవితకాల లాభాలు" }
+  },
+  { 
+    src: solarInstallWorker, 
+    alt: "సోలార్ ప్యానెల్ ఇన్‌స్టాలేషన్",
+    benefit: { en: "Easy Installation", te: "సులభ ఇన్‌స్టాలేషన్" },
+    subtext: { en: "Professional setup in 2-3 days", te: "2-3 రోజుల్లో ప్రొఫెషనల్ సెటప్" }
+  },
+  { 
+    src: farmerSolarMeter, 
+    alt: "రైతు సోలార్ మీటర్ చూస్తున్నారు",
+    benefit: { en: "Earn from Surplus", te: "మిగులు నుండి సంపాదన" },
+    subtext: { en: "Sell extra power to grid", te: "అదనపు విద్యుత్‌ను గ్రిడ్‌కు అమ్మండి" }
+  },
 ];
 
 function HeroCarousel() {
+  const { language } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
 
@@ -61,12 +92,25 @@ function HeroCarousel() {
               </div>
             </div>
           ) : (
-            <img
-              src={image.src}
-              alt={image.alt}
-              className="w-full h-full object-contain bg-white/5"
-              onError={() => handleImageError(index)}
-            />
+            <>
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="w-full h-full object-cover"
+                onError={() => handleImageError(index)}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute bottom-12 left-0 right-0 text-center px-4">
+                <div className="inline-block bg-solar/95 text-primary px-4 py-2 rounded-lg mb-2 shadow-lg">
+                  <p className="text-lg md:text-xl font-bold">
+                    {language === "en" ? image.benefit.en : image.benefit.te}
+                  </p>
+                </div>
+                <p className="text-white text-sm md:text-base font-medium drop-shadow-lg">
+                  {language === "en" ? image.subtext.en : image.subtext.te}
+                </p>
+              </div>
+            </>
           )}
         </div>
       ))}

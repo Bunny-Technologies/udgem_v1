@@ -6,22 +6,24 @@ import Layout from "@/components/Layout";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
 
-import solarRooftop1 from "@assets/stock_images/rooftop_solar_panels_2de590f5.jpg";
-import solarRooftop2 from "@assets/stock_images/rooftop_solar_panels_e16d52a0.jpg";
-import solarInstall1 from "@assets/stock_images/solar_panel_installa_52f9b98a.jpg";
-import solarInstall2 from "@assets/stock_images/solar_panel_installa_b21e2dd8.jpg";
-import solarInstall3 from "@assets/stock_images/solar_panel_installa_5f030dcd.jpg";
-import solarEnergy1 from "@assets/stock_images/solar_energy_green_e_1018ab3a.jpg";
-import solarEnergy2 from "@assets/stock_images/solar_energy_green_e_2e7b8f21.jpg";
+import indianHome1 from "@assets/stock_images/indian_family_house__ee5c6833.jpg";
+import indianHome2 from "@assets/stock_images/indian_family_house__b187bc2e.jpg";
+import indianHome3 from "@assets/stock_images/indian_family_house__a588d8d0.jpg";
+import indianVillage1 from "@assets/stock_images/indian_village_home__49b9020d.jpg";
+import indianVillage2 from "@assets/stock_images/indian_village_home__ded51408.jpg";
+import indianVillage3 from "@assets/stock_images/indian_village_home__7dc39a04.jpg";
+import indianTech1 from "@assets/stock_images/indian_technician_in_49d08f9b.jpg";
+import indianTech2 from "@assets/stock_images/indian_technician_in_8e72c31d.jpg";
 
 const carouselImages = [
-  { src: solarRooftop1, alt: "Residential rooftop solar installation" },
-  { src: solarRooftop2, alt: "Solar panels on house roof" },
-  { src: solarInstall1, alt: "Professional solar panel installation" },
-  { src: solarInstall2, alt: "Rooftop solar system setup" },
-  { src: solarInstall3, alt: "Home solar power installation" },
-  { src: solarEnergy1, alt: "Clean green solar energy" },
-  { src: solarEnergy2, alt: "Sustainable solar power" },
+  { src: indianHome1, alt: "Indian home with rooftop solar panels" },
+  { src: indianVillage1, alt: "Solar power in Indian village" },
+  { src: indianTech1, alt: "Indian technician installing solar panels" },
+  { src: indianHome2, alt: "Solar installation on Indian house" },
+  { src: indianVillage2, alt: "Rural Indian home with solar electricity" },
+  { src: indianTech2, alt: "Solar panel installation worker in India" },
+  { src: indianHome3, alt: "Indian family home with solar power" },
+  { src: indianVillage3, alt: "Green energy for Indian villages" },
 ];
 
 function HeroCarousel() {

@@ -96,12 +96,12 @@ export default function InfoSlider() {
   const Icon = currentCard.icon;
 
   return (
-    <div className="h-full flex flex-col" data-testid="info-slider-container">
-      <p className="text-xs text-white/60 text-center uppercase tracking-wide mb-2">
+    <div className="flex flex-col" data-testid="info-slider-container">
+      <p className="text-xs text-white/60 text-center uppercase tracking-wide mb-1">
         {language === "en" ? "Solar Facts" : "సోలార్ వాస్తవాలు"}
       </p>
       
-      <div className="flex-1 relative flex flex-col">
+      <div className="relative">
         <button
           onClick={prevSlide}
           className="absolute -top-1 left-1/2 -translate-x-1/2 z-20 bg-white/10 hover:bg-white/20 text-white p-1 rounded-full transition-colors"
@@ -110,7 +110,7 @@ export default function InfoSlider() {
           <ChevronUp className="h-4 w-4" />
         </button>
 
-        <div className="flex-1 flex items-center py-6">
+        <div className="py-5">
           <div
             className={`w-full bg-gradient-to-br ${currentCard.bgColor} rounded-lg p-3 text-white shadow-lg transition-all duration-300`}
             data-testid={`info-card-${currentSlide}`}
@@ -141,7 +141,7 @@ export default function InfoSlider() {
         </button>
       </div>
 
-      <div className="flex justify-center gap-1 mt-2">
+      <div className="flex justify-center gap-1 mt-1">
         {infoCards.map((_, index) => (
           <button
             key={index}

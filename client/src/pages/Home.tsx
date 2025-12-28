@@ -227,11 +227,9 @@ export default function Home() {
               <HeroCarousel />
             </div>
 
-            <div className="hidden lg:flex flex-col gap-3 h-full">
-              <div className="flex-1 min-h-0">
-                <InfoSlider />
-              </div>
-              <div className="border-t border-white/20 pt-3">
+            <div className="hidden lg:flex flex-col gap-4 justify-center">
+              <InfoSlider />
+              <div className="border-t border-white/20 pt-4">
                 <AdBanner />
               </div>
             </div>

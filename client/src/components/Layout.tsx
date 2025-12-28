@@ -202,7 +202,7 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguage] = useState<Language>("te");
   
   const t = (en: string, te: string) => language === "en" ? en : te;
 
